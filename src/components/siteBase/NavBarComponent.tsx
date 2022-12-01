@@ -1,10 +1,10 @@
 import React from "react";
-import style from './NavBar.module.css'
+import style from './NavBarComponent.module.css'
 
 
 type NavBarProps = {}
 
-const NavBar: React.FC<NavBarProps> = () => {
+const NavBarComponent: React.FC<NavBarProps> = () => {
 
     return (
         <nav className={`${style["nav-bar"]} ${style["nav-bar-container"]}`}>
@@ -15,4 +15,4 @@ const NavBar: React.FC<NavBarProps> = () => {
     )
 }
 
-export default NavBar
+export default NavBarComponent
