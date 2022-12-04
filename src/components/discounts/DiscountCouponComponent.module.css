@@ -1,0 +1,21 @@
+.discount-item {
+    border: 1px solid black;
+    min-width: 300px;
+    width: calc(33.33% - 30px);
+    overflow: hidden;
+    height: 450px;
+    max-height: 450px;
+
+}
+
+.discount-item img {
+    margin: -25% 0;
+    width: 100%;
+    height: auto;
+
+}
+
+.discount-item {
+    width: calc(33.33% - 30px);
+    height: 400px;
+}

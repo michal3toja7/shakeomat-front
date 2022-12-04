@@ -1,0 +1,10 @@
+.container {
+    padding: 100px 10%;
+}
+.discount-container{
+    display: flex;
+    row-gap: 30px;
+    column-gap: 30px;
+    flex-direction: row;
+    flex-wrap: wrap;
+}

@@ -46,6 +46,7 @@
     font-weight: bold;
     text-shadow: 5px 5px 80px rgba(66, 68, 90, 1);
     transition: 0.5s background-color, 0.5s text-shadow, 0.5s color;
+    cursor: pointer;
 }
 
 .content-switcher:hover {
@@ -53,13 +54,14 @@
 }
 
 .content-switcher.selected {
-    text-shadow: 5px 5px 80px rgba(255, 255, 255, 1);
+    text-shadow: 3px 3px 15px rgba(255, 255, 255, 1);
     background-color: #e02130;
     color: #fff;
+    /*text-decoration: underline;*/
 }
 
 .content-switcher.selected:hover {
-    text-shadow: 5px 5px 20px rgba(255, 255, 255, 1);
+    text-shadow: 5px 5px 5px rgba(255, 255, 255, 1);
     background-color: #e02130;
     color: #fff;
 }
