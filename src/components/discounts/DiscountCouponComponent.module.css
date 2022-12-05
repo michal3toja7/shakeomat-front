@@ -1,21 +1,58 @@
 .discount-item {
+    border-radius: 20px;
     border: 1px solid black;
     min-width: 300px;
     width: calc(33.33% - 30px);
     overflow: hidden;
-    height: 450px;
-    max-height: 450px;
-
+    text-align: center;
 }
 
 .discount-item img {
-    margin: -25% 0;
+    /*margin: -25% 0;*/
     width: 100%;
-    height: auto;
+    /*height: 100%;*/
 
 }
 
-.discount-item {
-    width: calc(33.33% - 30px);
-    height: 400px;
+.item-control-container {
+    background-color: #e02130;
+    padding: 15px;
+    display: flex;
+    justify-content: space-around;
 }
+
+.control-item {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.control-item span {
+    /*background-size: 15px;*/
+    background-position: center;
+    display: block;
+    width: 40px;
+    height: 40px;
+    color: white;
+}
+
+.control-item.reserve span {
+    background-image: url("/public/img/lock.svg");
+}
+
+.control-item.show span {
+    background-image: url("/public/img/visibility.svg");
+}
+
+.control-item.make-public span {
+    background-image: url("/public/img/group_add.svg");
+}
+
+.control-item.use-up span {
+    background-image: url("/public/img/done.svg");
+}
+
+/*reserve*/
+/*show*/
+/*make-public*/
+/*use-up*/

@@ -12,7 +12,7 @@ export default function authHeader() {
     //     // return { 'x-access-token': null }; // for Node Express back-end
     // }
     return {
-        Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjcwMjcwMzY2LCJpYXQiOjE2Njk2NjU1NjYsImp0aSI6IjRiNWM1OGY2ZmJiODQ1ZTViNmM2ZDA5YWY3OTQ0ODA5IiwidXNlcl9pZCI6MX0.7l0vDFgbSg6TxjMc2LBgSF-J5QCxreownFOzhfYqwUE"
+        Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjcwODc2NTcwLCJpYXQiOjE2NzAyNzE3NzAsImp0aSI6IjdlZjZhM2VmYTI2YTRkMzRiODQwZTQxZmUxNjA1MTQxIiwidXNlcl9pZCI6MX0.wzKL7WCoT53-mavsJVaIvn73_VT2098ksoqte4vzRY0"
     }
 
 }
