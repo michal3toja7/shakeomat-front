@@ -15,17 +15,21 @@ type DiscountCouponComponentProps = {
 
 const DiscountCouponComponent: React.FC<DiscountCouponComponentProps> = ({discountCoupon}: DiscountCouponComponentProps) => {
     const [informationIsOpen, setInformationIsOpen] = useState<boolean>(false)
+    const [isReserved, setIsReserved] = useState<boolean>(false)
 
     const onShowHandler = () => {
         setInformationIsOpen(prevState => !prevState)
     }
+    const onReserveHandler = () => {
+        setIsReserved(prevState => !prevState)
+    }
 
     return (
-        <div className={`${style["discount-item"]} ${informationIsOpen && style["show-information"]}`}>
+        <div className={`${style["discount-item"]} ${informationIsOpen && style["show-information"]} ${isReserved && style["reserved"]}`}>
             <img src={discountCoupon.discount_image} alt={discountCoupon.discount_title || ""}></img>
             <div className={style["item-control-container"]} style={{position: "relative"}}>
                 <CouponInformationComponent couponCard={discountCoupon.discount_card} isOpen={informationIsOpen}/>
-                <CouponControlButton text={"Rezerwuj"} Icon={LockIcon} buttonAction={() => null}/>
+                <CouponControlButton text={"Rezerwuj"} Icon={LockIcon} buttonAction={onReserveHandler}/>
                 <CouponControlButton text={"Pokaż"} Icon={VisibilityIcon} buttonAction={onShowHandler}/>
                 <CouponControlButton text={"Udostępnij"} Icon={GroupIcon} buttonAction={() => null}/>
                 <CouponControlButton text={"Użyj"} Icon={DoneIcon} buttonAction={() => null}/>
