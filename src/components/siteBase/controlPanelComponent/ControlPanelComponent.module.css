@@ -1,22 +1,20 @@
 .control {
     left: 0;
-    bottom: 10px;
+    bottom: 0;
     position: fixed;
     height: 60px;
     width: 100%;
     z-index: 101;
-    background-color: transparent;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
+    background: #fff;
 }
 
 .control-container {
-    /*border: #f0922e solid 5px;*/
     height: 100%;
     width: 70%;
     display: flex;
-    align-items: center;
     justify-content: center;
     border-radius: 30px;
 }
@@ -24,7 +22,7 @@
 .switch-container {
     height: fit-content;
     border-radius: 30px;
-    border: #e02130 solid 4px;
+    border: #f0922e solid 4px;
     background-color: #fded14;
     display: flex;
     align-items: center;
@@ -53,13 +51,6 @@
     text-shadow: 5px 5px 20px rgba(66, 68, 90, 1);
 }
 
-.content-switcher.selected {
-    text-shadow: 3px 3px 15px rgba(255, 255, 255, 1);
-    background-color: #e02130;
-    color: #fff;
-    /*text-decoration: underline;*/
-}
-
 .content-switcher.selected:hover {
     text-shadow: 5px 5px 5px rgba(255, 255, 255, 1);
     background-color: #e02130;
@@ -67,15 +58,21 @@
 }
 
 .content-switcher:first-child {
-    border-right: #e02130 solid 2px;
+    border-right: #f0922e solid 2px;
     border-bottom-left-radius: 20px;
     border-top-left-radius: 20px;
 
 }
 
 .content-switcher:last-child {
-    border-left: #e02130 solid 2px;
+    border-left: #f0922e solid 2px;
     border-bottom-right-radius: 20px;
     border-top-right-radius: 20px;
 
+}
+
+.content-switcher.selected {
+    text-shadow: 3px 3px 15px rgba(255, 255, 255, 1);
+    background-color: #e02130;
+    color: #fff;
 }
