@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import style from './DiscountContainerComponent.module.css'
 import IDiscountCoupon from "../../types/discountCoupon.type";
 import getDiscountCoupons from "../../services/discount.service";
-import DiscountCouponComponent from "./DiscountCouponComponent";
+import DiscountCouponComponent from "./coupon/DiscountCouponComponent";
 
 
 type DiscountContainerComponentProps = {}

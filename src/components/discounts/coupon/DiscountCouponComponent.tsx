@@ -1,10 +1,10 @@
 import React from "react";
 import style from './DiscountCouponComponent.module.css'
-import IDiscountCoupon from "../../types/discountCoupon.type";
-import DoneIcon from "../../assets/DoneIcon";
-import LockIcon from "../../assets/LockIcon";
-import VisibilityIcon from "../../assets/VisibilityIcon";
-import GroupIcon from "../../assets/GroupIcon";
+import IDiscountCoupon from "../../../types/discountCoupon.type";
+import DoneIcon from "../../../assets/DoneIcon";
+import LockIcon from "../../../assets/LockIcon";
+import VisibilityIcon from "../../../assets/VisibilityIcon";
+import GroupIcon from "../../../assets/GroupIcon";
 
 
 type DiscountCouponComponentProps = {
