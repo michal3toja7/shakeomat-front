@@ -8,9 +8,8 @@
 }
 
 .discount-item img {
-    /*margin: -25% 0;*/
     width: 100%;
-    /*height: 100%;*/
+    min-height: 300px;
 
 }
 
@@ -22,37 +21,26 @@
 }
 
 .control-item {
+    text-align: center;
+    width: 20%;
     display: flex;
     flex-direction: column;
+    color: #ffffff;
+    font-size: 12px;
+    height: 100%;
+    white-space: nowrap;
 }
 
 
-.control-item span {
-    /*background-size: 15px;*/
-    background-position: center;
-    display: block;
-    width: 40px;
-    height: 40px;
+.control-item .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: white;
 }
 
-.control-item.reserve span {
-    background-image: url("/public/img/lock.svg");
+.control-item .icon svg {
+    width: calc(100% - 20px);
+    max-width: 40px;
+    max-height: 40px;
 }
-
-.control-item.show span {
-    background-image: url("/public/img/visibility.svg");
-}
-
-.control-item.make-public span {
-    background-image: url("/public/img/group_add.svg");
-}
-
-.control-item.use-up span {
-    background-image: url("/public/img/done.svg");
-}
-
-/*reserve*/
-/*show*/
-/*make-public*/
-/*use-up*/
