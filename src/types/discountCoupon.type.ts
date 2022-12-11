@@ -17,6 +17,6 @@ export default interface IDiscountCoupon {
     discount_description: string | null
     start_validity_period: Date,
     end_validity_period: Date,
-    discount_car: IDiscountCard
+    discount_card: IDiscountCard
     is_public: boolean
 }
