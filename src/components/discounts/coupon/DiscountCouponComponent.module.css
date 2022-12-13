@@ -1,4 +1,5 @@
 .discount-item {
+    position: relative;
     border-radius: 20px;
     border: 1px solid black;
     min-width: 300px;
@@ -6,10 +7,14 @@
     width: calc(33.33% - 30px);
     overflow: hidden;
     text-align: center;
+}
+
+.discount-item-container {
     transition: filter 0.5s ease-in;
 }
-.discount-item.reserved {
-    filter: blur(4px) grayscale(100%);
+
+.discount-item-container.reserved {
+    filter: blur(3px) grayscale(100%);
     pointer-events: none;
 }
 
@@ -69,6 +74,7 @@
     opacity: 1;
     transition: opacity 0.5s ease-in;
 }
+
 .information-container.close {
     opacity: 0;
 
@@ -100,4 +106,32 @@
 .information-container .code-container canvas {
     width: calc(100% - 20px);
     height: 100px;
+}
+
+.item-modal {
+    position: absolute;
+    left: 0;
+    width: 200%;
+    top: 25%;
+    background: #fff;
+    border-top: 5px solid #e02130;
+    border-bottom: 5px solid #e02130;
+    z-index: 1;
+    padding: 10px 0;
+    font-family: Arial, serif;
+    font-style: italic;
+    font-weight: bold;
+    transform: rotate(-15deg) translateX(-25%);
+}
+.item-modal .title {
+    font-size: 25px;
+    font-weight: bold;
+    color: #e02130;
+    padding-bottom: 5px;
+}
+.item-modal .user span {
+    font-weight: normal;
+}
+.item-modal .after-text {
+    font-weight: lighter;
 }
