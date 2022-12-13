@@ -17,6 +17,11 @@ const initContentSwitcher: IContentSwitcher[] = [
         key: "public",
         isSelected: false,
         text: "zniżki publiczne",
+    },
+    {
+        key: "reserved",
+        isSelected: false,
+        text: "zarezerwowane",
     }
 ]
 
