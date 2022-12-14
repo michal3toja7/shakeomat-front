@@ -1,0 +1,37 @@
+.item-modal {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+    background: #fff;
+    border-top: 5px solid #e02130;
+    border-bottom: 5px solid #e02130;
+    z-index: 1;
+    padding: 10px 0;
+    font-family: Arial, serif;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.item-modal.rotated {
+    width: 120%;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%) rotate(-15deg);
+}
+
+.item-modal .title {
+    font-size: 25px;
+    font-weight: bold;
+    color: #e02130;
+    padding-bottom: 5px;
+}
+
+.item-modal .user span {
+    font-weight: normal;
+}
+
+.item-modal .after-text {
+    font-weight: lighter;
+}

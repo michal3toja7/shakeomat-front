@@ -1,5 +1,5 @@
 import React from "react";
-import style from './DiscountCouponComponent.module.css'
+import style from './DiscountCouponModal.module.css'
 
 
 type Props = {
