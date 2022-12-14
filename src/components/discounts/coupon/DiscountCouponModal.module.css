@@ -1,3 +1,7 @@
+.modal-container.init {
+    opacity: 0;
+}
+
 .modal-container {
     position: absolute;
     top: 0;
@@ -6,9 +10,16 @@
     right: 0;
     backdrop-filter: blur(3px) grayscale(100%);
     z-index: 1;
+    opacity: 1;
+    transition: opacity 400ms;
+}
+
+.item-modal.init {
+    opacity: 0;
 }
 
 .item-modal {
+    opacity: 1;
     position: absolute;
     width: 100%;
     top: 50%;
