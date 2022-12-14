@@ -9,6 +9,7 @@ import CouponControlButton from "./CouponControlButton";
 import CouponInformationComponent from "./CouponInformationComponent";
 import {reserveDiscountCoupon} from "../../../services/discount.service";
 import UserReservedComponent from "./UserActionComponent";
+import CouponConfirmationComponent from "./CouponConfirmationComponent";
 
 
 type DiscountCouponComponentProps = {
@@ -20,8 +21,13 @@ const DiscountCouponComponent: React.FC<DiscountCouponComponentProps> = ({discou
     const [informationIsOpen, setInformationIsOpen] = useState<boolean>(false)
     const [isReserved, setIsReserved] = useState<boolean>(discountCoupon.status.status === "RESERVED")
     const [isUsed, setIsUsed] = useState<boolean>(discountCoupon.status.status === "USED")
+    const [showConfirmation, setShowConfirmation] = useState<boolean>(false)
 
     const onShowHandler = () => {
+        if (informationIsOpen){
+            onCloseInformation()
+            return
+        }
         setInformationIsOpen(prevState => !prevState)
     }
     const onReserveHandler = () => {
@@ -34,6 +40,11 @@ const DiscountCouponComponent: React.FC<DiscountCouponComponentProps> = ({discou
 
     const onCloseInformation = () => {
         setInformationIsOpen(false)
+        setShowConfirmation(true)
+    }
+
+    const onConfirmationHandler = () => {
+        setShowConfirmation(false)
     }
 
     return (
@@ -43,6 +54,12 @@ const DiscountCouponComponent: React.FC<DiscountCouponComponentProps> = ({discou
                                        user={discountCoupon.status.reserved_by || ""}/>
             )
             }
+            {showConfirmation && (
+                <CouponConfirmationComponent confirmationLiftUp={onConfirmationHandler}/>
+            )
+            }
+
+            {/*<CouponConfirmationComponent/>*/}
 
             <div className={`${style["discount-item-container"]} ${isReserved && style["reserved"]}`}>
 
