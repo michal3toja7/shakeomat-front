@@ -44,6 +44,16 @@
     font-size: 12px;
     height: 100%;
     white-space: nowrap;
+    border-radius: 15px;
+
+    transition: transform 300ms, background-color 300ms ease-in;
+
+}
+.control-item:hover {
+    background-color: rgba(156, 22, 31,0.7);
+    transform: scale(1.1);
+;
+
 }
 
 

@@ -12,10 +12,11 @@ import UserReservedComponent from "./UserReservedComponent";
 
 
 type DiscountCouponComponentProps = {
-    discountCoupon: IDiscountCoupon
+    discountCoupon: IDiscountCoupon,
+    discountUpdate: Function
 }
 
-const DiscountCouponComponent: React.FC<DiscountCouponComponentProps> = ({discountCoupon}: DiscountCouponComponentProps) => {
+const DiscountCouponComponent: React.FC<DiscountCouponComponentProps> = ({discountCoupon, discountUpdate}) => {
     const [informationIsOpen, setInformationIsOpen] = useState<boolean>(false)
     const [isReserved, setIsReserved] = useState<boolean>(discountCoupon.status.status === "RESERVED")
 
@@ -26,6 +27,7 @@ const DiscountCouponComponent: React.FC<DiscountCouponComponentProps> = ({discou
         reserveDiscountCoupon(discountCoupon)
             .then(updatedDiscountCoupon => {
                 setIsReserved(updatedDiscountCoupon.status.status === "RESERVED")
+                discountUpdate(updatedDiscountCoupon)
             })
     }
 

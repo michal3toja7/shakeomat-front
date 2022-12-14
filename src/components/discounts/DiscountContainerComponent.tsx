@@ -16,13 +16,27 @@ const DiscountContainerComponent: React.FC<DiscountContainerComponentProps> = ()
         })
     }, []);
 
+    const discountsUpdate = (discount: IDiscountCoupon) => {
+        if (!discountCoupons)
+            return
+        let tempDiscounts = discountCoupons
+        const index = tempDiscounts.findIndex(discountCoupon => {
+            return discountCoupon.id === discount.id;
+        });
+        tempDiscounts[index] = discount
+        setDiscountCoupons([...tempDiscounts])
+    }
+
     return (
         <div className={style["container"]}>
             <div className={style["discount-container"]}>
                 {
                     discountCoupons?.map(discountCoupon => {
                         return (
-                            <DiscountCouponComponent discountCoupon={discountCoupon}/>
+                            <DiscountCouponComponent key={discountCoupon.id}
+                                                     discountCoupon={discountCoupon}
+                                                     discountUpdate={discountsUpdate}
+                            />
                         )
                     })
                 }
