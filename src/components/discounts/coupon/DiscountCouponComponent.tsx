@@ -8,7 +8,7 @@ import GroupIcon from "../../../assets/GroupIcon";
 import CouponControlButton from "./CouponControlButton";
 import CouponInformationComponent from "./CouponInformationComponent";
 import {reserveDiscountCoupon} from "../../../services/discount.service";
-import UserReservedComponent from "./UserReservedComponent";
+import UserReservedComponent from "./UserActionComponent";
 
 
 type DiscountCouponComponentProps = {
@@ -19,6 +19,7 @@ type DiscountCouponComponentProps = {
 const DiscountCouponComponent: React.FC<DiscountCouponComponentProps> = ({discountCoupon, discountUpdate}) => {
     const [informationIsOpen, setInformationIsOpen] = useState<boolean>(false)
     const [isReserved, setIsReserved] = useState<boolean>(discountCoupon.status.status === "RESERVED")
+    const [isUsed, setIsUsed] = useState<boolean>(discountCoupon.status.status === "USED")
 
     const onShowHandler = () => {
         setInformationIsOpen(prevState => !prevState)
@@ -37,8 +38,10 @@ const DiscountCouponComponent: React.FC<DiscountCouponComponentProps> = ({discou
 
     return (
         <div className={`${style["discount-item"]} ${informationIsOpen && style["show-information"]}`}>
-            {isReserved && <UserReservedComponent user={discountCoupon.status.reserved_by || ""}/>
-
+            {(isReserved || isUsed) && (
+                <UserReservedComponent reserved={isReserved} used={isUsed}
+                                       user={discountCoupon.status.reserved_by || ""}/>
+            )
             }
 
             <div className={`${style["discount-item-container"]} ${isReserved && style["reserved"]}`}>

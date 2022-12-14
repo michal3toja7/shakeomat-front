@@ -141,9 +141,9 @@
 
 .item-modal {
     position: absolute;
-    left: 0;
-    width: 200%;
-    top: 25%;
+    width: 100%;
+    top: 50%; right: 50%;
+    transform: translate(50%,-50%);
     background: #fff;
     border-top: 5px solid #e02130;
     border-bottom: 5px solid #e02130;
@@ -152,7 +152,12 @@
     font-family: Arial, serif;
     font-style: italic;
     font-weight: bold;
-    transform: rotate(-15deg) translateX(-25%);
+}
+
+.item-modal.rotated {
+    width: 120%;
+    top: 50%; right: 50%;
+    transform: translate(50%,-50%) rotate(-15deg);
 }
 
 .item-modal .title {
