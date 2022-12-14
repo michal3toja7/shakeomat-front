@@ -21,6 +21,7 @@ const DiscountCouponComponent: React.FC<DiscountCouponComponentProps> = ({discou
     const [informationIsOpen, setInformationIsOpen] = useState<boolean>(false)
     const [isReserved, setIsReserved] = useState<boolean>(discountCoupon.status.status === "RESERVED")
     const [isUsed, setIsUsed] = useState<boolean>(discountCoupon.status.status === "USED")
+    const [tryUse, setTryUse] = useState<boolean>(false)
     const [showConfirmation, setShowConfirmation] = useState<boolean>(false)
 
     const onShowHandler = () => {
@@ -41,6 +42,12 @@ const DiscountCouponComponent: React.FC<DiscountCouponComponentProps> = ({discou
     const onCloseInformation = () => {
         setInformationIsOpen(false)
         setShowConfirmation(true)
+        setTryUse(false)
+    }
+
+    const onUseHandler = () => {
+        setShowConfirmation(true)
+        setTryUse(true)
     }
 
     const onConfirmationHandler = () => {
@@ -55,7 +62,7 @@ const DiscountCouponComponent: React.FC<DiscountCouponComponentProps> = ({discou
             )
             }
             {showConfirmation && (
-                <CouponConfirmationComponent confirmationLiftUp={onConfirmationHandler}/>
+                <CouponConfirmationComponent confirmationLiftUp={onConfirmationHandler} verification={tryUse}/>
             )
             }
 
@@ -71,7 +78,7 @@ const DiscountCouponComponent: React.FC<DiscountCouponComponentProps> = ({discou
                     <CouponControlButton text={"Rezerwuj"} Icon={LockIcon} buttonAction={onReserveHandler}/>
                     <CouponControlButton text={"Pokaż"} Icon={VisibilityIcon} buttonAction={onShowHandler}/>
                     <CouponControlButton text={"Udostępnij"} Icon={GroupIcon} buttonAction={() => null}/>
-                    <CouponControlButton text={"Użyj"} Icon={DoneIcon} buttonAction={() => null}/>
+                    <CouponControlButton text={"Użyj"} Icon={DoneIcon} buttonAction={onUseHandler}/>
                 </div>
             </div>
         </div>
