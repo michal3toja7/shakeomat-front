@@ -49,11 +49,10 @@
     transition: transform 300ms, background-color 300ms ease-in;
 
 }
-.control-item:hover {
-    background-color: rgba(156, 22, 31,0.7);
-    transform: scale(1.1);
-;
 
+.control-item:hover {
+    background-color: rgba(156, 22, 31, 0.7);
+    transform: scale(1.1);
 }
 
 
@@ -83,6 +82,28 @@
     width: 100%;
     opacity: 1;
     transition: opacity 0.5s ease-in;
+}
+
+.information-container .close-button {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    right: 0;
+    top: -10px;
+    background: rgba(255,255,255);
+    color: rgba(156, 22, 31);
+    font-weight: 800;
+    width: 40px;
+    height: 30px;
+    border: 2px solid rgba(156, 22, 31);
+    transition: transform 300ms;
+    cursor: pointer;
+}
+.information-container .close-button:hover {
+    transform: scale(1.2);
+
 }
 
 .information-container.close {
@@ -133,15 +154,18 @@
     font-weight: bold;
     transform: rotate(-15deg) translateX(-25%);
 }
+
 .item-modal .title {
     font-size: 25px;
     font-weight: bold;
     color: #e02130;
     padding-bottom: 5px;
 }
+
 .item-modal .user span {
     font-weight: normal;
 }
+
 .item-modal .after-text {
     font-weight: lighter;
 }

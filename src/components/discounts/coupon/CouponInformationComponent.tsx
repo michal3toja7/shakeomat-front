@@ -7,9 +7,10 @@ import bwipjs from "bwip-js";
 type Props = {
     couponCard: IDiscountCard
     isOpen: boolean
+    setIsClose: Function
 }
 
-const CouponInformationComponent: React.FC<Props> = ({couponCard, isOpen}) => {
+const CouponInformationComponent: React.FC<Props> = ({couponCard, isOpen, setIsClose}) => {
     const canvasRef = useRef<HTMLCanvasElement>(null)
 
     useEffect(() => {
@@ -26,8 +27,15 @@ const CouponInformationComponent: React.FC<Props> = ({couponCard, isOpen}) => {
         }
     }, [canvasRef, couponCard.card_number]);
 
+    const onCloseHandler = () => {
+        setIsClose()
+    }
+
     return (
         <div className={`${style["information-container"]} ${!isOpen && style["close"]}`}>
+            <div className={style["close-button"]} onClick={onCloseHandler}>
+                X
+            </div>
             <div className={style["information-title"]}>
                 Aby użyć podaj:
             </div>

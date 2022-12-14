@@ -31,9 +31,13 @@ const DiscountCouponComponent: React.FC<DiscountCouponComponentProps> = ({discou
             })
     }
 
+    const onCloseInformation = () => {
+        setInformationIsOpen(false)
+    }
+
     return (
         <div className={`${style["discount-item"]} ${informationIsOpen && style["show-information"]}`}>
-            {isReserved && <UserReservedComponent user={discountCoupon.status.reserved_by||""}/>
+            {isReserved && <UserReservedComponent user={discountCoupon.status.reserved_by || ""}/>
 
             }
 
@@ -41,7 +45,9 @@ const DiscountCouponComponent: React.FC<DiscountCouponComponentProps> = ({discou
 
                 <img src={discountCoupon.discount_image} alt={discountCoupon.discount_title || ""}></img>
                 <div className={style["item-control-container"]} style={{position: "relative"}}>
-                    <CouponInformationComponent couponCard={discountCoupon.discount_card} isOpen={informationIsOpen}/>
+                    <CouponInformationComponent couponCard={discountCoupon.discount_card}
+                                                isOpen={informationIsOpen}
+                                                setIsClose={onCloseInformation}/>
                     <CouponControlButton text={"Rezerwuj"} Icon={LockIcon} buttonAction={onReserveHandler}/>
                     <CouponControlButton text={"Pokaż"} Icon={VisibilityIcon} buttonAction={onShowHandler}/>
                     <CouponControlButton text={"Udostępnij"} Icon={GroupIcon} buttonAction={() => null}/>
