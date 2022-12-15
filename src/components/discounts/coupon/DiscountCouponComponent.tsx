@@ -25,7 +25,7 @@ const DiscountCouponComponent: React.FC<DiscountCouponComponentProps> = ({discou
     const [showConfirmation, setShowConfirmation] = useState<boolean>(false)
 
     const onShowHandler = () => {
-        if (informationIsOpen){
+        if (informationIsOpen) {
             onCloseInformation()
             return
         }
@@ -66,11 +66,10 @@ const DiscountCouponComponent: React.FC<DiscountCouponComponentProps> = ({discou
             )
             }
 
-            {/*<CouponConfirmationComponent/>*/}
-
             <div className={`${style["discount-item-container"]} ${isReserved && style["reserved"]}`}>
-
-                <img src={discountCoupon.discount_image} alt={discountCoupon.discount_title || ""}></img>
+                <div className={style["image-container"]}>
+                    <img src={discountCoupon.discount_image} alt={discountCoupon.discount_title || ""}></img>
+                </div>
                 <div className={style["item-control-container"]} style={{position: "relative"}}>
                     <CouponInformationComponent couponCard={discountCoupon.discount_card}
                                                 isOpen={informationIsOpen}

@@ -14,11 +14,20 @@
 
 .discount-item-container {
     transition: filter 0.5s ease-in;
+    position: relative;
+    height: 100%;
 }
 
 .discount-item-container.reserved {
     filter: blur(3px) grayscale(100%);
     pointer-events: none;
+}
+
+.image-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100% - 70px);
 }
 
 .discount-item img {
@@ -32,8 +41,9 @@
 }
 
 .item-control-container {
+    height: 70px;
     background-color: #e02130;
-    padding: 15px;
+    padding: 10px 5px;
     display: flex;
     justify-content: space-around;
 }
@@ -45,7 +55,6 @@
     flex-direction: column;
     color: #ffffff;
     font-size: 12px;
-    height: 100%;
     white-space: nowrap;
     border-radius: 15px;
     cursor: pointer;
@@ -54,8 +63,7 @@
 }
 
 .control-item:hover {
-    background-color: rgba(156, 22, 31, 0.7);
-    transform: scale(1.1);
+    transform: scale(1.1) translateY(-3px);
 }
 
 
@@ -67,9 +75,8 @@
 }
 
 .control-item .icon svg {
-    width: calc(100% - 20px);
-    max-width: 40px;
-    max-height: 40px;
+    width: 35px;
+    height: 35px;
 }
 
 .information-container {
