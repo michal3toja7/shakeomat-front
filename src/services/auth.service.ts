@@ -5,18 +5,18 @@ import {getUserData} from "./user.service";
 
 
 
-export const login = (email: string, password: string) => {
+export const login = (username: string, password: string) => {
     return axios
         .post(API_URL + "token/", {
-            email,
+            username,
             password
         })
-        .then(async (response) => {
+        .then((response) => {
             if (response.data.access) {
                 localStorage.setItem("authUser", JSON.stringify(response.data));
-                await getUserData().then((response) => {
+                 getUserData().then((response) => {
                         localStorage.setItem("currentUser", JSON.stringify(response.data));
-                        return JSON.stringify(response.data)
+                        return response.data
                     }
                 );
             }
