@@ -1,15 +1,15 @@
 import React from 'react';
 import './App.css';
-import NavBarComponent from "./components/siteBase/NavBarComponent";
-import ControlPanelComponent from "./components/siteBase/controlPanelComponent/ControlPanelComponent";
-import DiscountContainerComponent from "./components/discounts/DiscountContainerComponent";
+import DiscountApp from "./components/DiscountApp";
+import {Route, Routes} from 'react-router-dom';
 
 function App() {
     return (
         <React.Fragment>
-            <NavBarComponent/>
-            <DiscountContainerComponent/>
-            <ControlPanelComponent/>
+            <Routes>
+                <Route path="/" element={<DiscountApp/>}/>
+            </Routes>
+
         </React.Fragment>
     );
 }
