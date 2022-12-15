@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import style from './DiscountCouponComponent.module.css'
 import {IDiscountCard} from "../../../types/discountCoupon.type";
 import bwipjs from "bwip-js";
@@ -12,6 +12,14 @@ type Props = {
 
 const CouponInformationComponent: React.FC<Props> = ({couponCard, isOpen, setIsClose}) => {
     const canvasRef = useRef<HTMLCanvasElement>(null)
+    const [openState, setOpenState] = useState<boolean>(false)
+    useEffect(() => {
+        if (isOpen)
+            setTimeout(() => {
+                setOpenState(isOpen)
+            }, 1)
+    }, []);
+
 
     useEffect(() => {
         let canvas = canvasRef.current
@@ -28,11 +36,15 @@ const CouponInformationComponent: React.FC<Props> = ({couponCard, isOpen, setIsC
     }, [canvasRef, couponCard.card_number]);
 
     const onCloseHandler = () => {
-        setIsClose()
+        setOpenState(false)
+        setTimeout(() => {
+            setIsClose()
+        }, 300)
+
     }
 
     return (
-        <div className={`${style["information-container"]} ${!isOpen && style["close"]}`}>
+        <div className={`${style["information-container"]} ${!openState && style["close"]}`}>
             <div className={style["close-button"]} onClick={onCloseHandler}>
                 X
             </div>

@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import style from './DiscountCouponModal.module.css'
-import getDiscountCoupons from "../../../services/discount.service";
 
 
 type Props = {
@@ -14,7 +13,7 @@ const CouponModalContainer: React.FC<Props> = ({rotated, children}) => {
     useEffect(() => {
         setTimeout(() => {
             setInitComponent(false)
-        }, 50)
+        }, 1)
     }, []);
 
     return (
