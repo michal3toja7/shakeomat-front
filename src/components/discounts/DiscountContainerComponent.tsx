@@ -4,12 +4,14 @@ import IDiscountCoupon from "../../types/discountCoupon.type";
 import DiscountCouponComponent from "./coupon/DiscountCouponComponent";
 import getDiscountCoupons from "../../services/discount.service";
 import {useSearchParams} from "react-router-dom";
+import LoadingModal from "../siteBase/LoadingModal";
 
 
 type DiscountContainerComponentProps = {}
 
 const DiscountContainerComponent: React.FC<DiscountContainerComponentProps> = () => {
     const [discountCoupons, setDiscountCoupons] = useState<IDiscountCoupon[]>()
+    const [loading, setLoading] = useState<boolean>(true)
     const [searchParams] = useSearchParams()
     const getType = () => {
         return searchParams.get("type") || "private"
@@ -17,9 +19,13 @@ const DiscountContainerComponent: React.FC<DiscountContainerComponentProps> = ()
 
 
     useEffect(() => {
-        getDiscountCoupons(getType()).then(result => {
+        setLoading(true)
+        getDiscountCoupons(getType())
+            .then(result => {
             setDiscountCoupons(result.results)
+                setLoading(false)
         })
+            .catch(()=> setLoading(false))
     }, [searchParams]);
 
     const discountsUpdate = (discount: IDiscountCoupon, remove: boolean = false) => {
@@ -50,6 +56,8 @@ const DiscountContainerComponent: React.FC<DiscountContainerComponentProps> = ()
                     })
                 }
             </div>
+            <LoadingModal isLoading={loading}/>
+
         </div>
     )
 }

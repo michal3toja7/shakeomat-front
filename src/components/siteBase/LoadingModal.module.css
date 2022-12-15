@@ -1,5 +1,6 @@
 .loader-container {
-    display: none;
+    opacity: 0;
+    display: flex;
     position: absolute;
     left: 0;
     top: 0;
@@ -8,16 +9,20 @@
     justify-content: center;
     align-items: center;
     z-index: 101;
-    backdrop-filter: grayscale(100%) blur(3px);
+    backdrop-filter: grayscale(100%) blur(5px);
     flex-direction: column;
     row-gap: 20px;
     font-size: 20px;
     font-weight: bold;
     text-shadow: 5px 5px 80px rgba(66, 68, 90, 1);
+    transition: opacity 600ms;
 
 }
 .loader-container.show-modal {
-    display: flex;
+    opacity: 1;
+}
+.loader-container.display-none {
+    display: none;
 }
 
 .loader {

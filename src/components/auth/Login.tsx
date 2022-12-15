@@ -5,6 +5,7 @@ import style from './Login.module.css'
 import {login} from "../../services/auth.service";
 import Button from "../siteBase/Button";
 import LogoSVG from "../../assets/LogoSVG";
+import LoadingModal from "../siteBase/LoadingModal";
 
 type LoginProps = {}
 
@@ -107,7 +108,7 @@ const Login: React.FC<LoginProps> = () => {
                                 <Button buttonText={"Zaloguj"} onClick={handleLogin} disabled={loading}/>
                             </div>
                         </form>
-                        {/*<LoadingModal isLoading={loading} loadingMassage={message}/>*/}
+                        <LoadingModal isLoading={loading} loadingMassage={message}/>
                     </div>
                 </div>
             </React.Fragment>
