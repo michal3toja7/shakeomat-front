@@ -9,7 +9,7 @@ export interface IUserToken {
 }
 
 export interface IUser {
-    email: string,
+    username: string,
     user_profile: IUserProfile,
     url: string
 }

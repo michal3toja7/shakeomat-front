@@ -9,7 +9,7 @@ export const getUserData = () => {
 };
 
 const unauthorized: IUser = {
-    email: "unauthorized",
+    username: "unauthorized",
     user_profile: {
         last_name: "",
         first_name: "",
@@ -22,14 +22,10 @@ export const getCurrentUser = (): IUser => {
     let userStr = localStorage.getItem("currentUser");
     if (userStr)
         return JSON.parse(userStr)
-    // await getUserData()
-    // userStr = localStorage.getItem("currentUser");
-    // if (userStr)
-    //     return JSON.parse(userStr)
     return unauthorized
 }
 
 
 export const isAuth = (): boolean => {
-    return (getCurrentUser().email !== "unauthorized")
+    return (getCurrentUser().username !== "unauthorized")
 }

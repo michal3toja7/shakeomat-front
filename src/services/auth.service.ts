@@ -11,10 +11,10 @@ export const login = (username: string, password: string) => {
             username,
             password
         })
-        .then((response) => {
-            if (response.data.access) {
+        .then(async(response) => {
+            if ( response.data.access) {
                 localStorage.setItem("authUser", JSON.stringify(response.data));
-                 getUserData().then((response) => {
+                 await getUserData().then((response) => {
                         localStorage.setItem("currentUser", JSON.stringify(response.data));
                         return response.data
                     }
