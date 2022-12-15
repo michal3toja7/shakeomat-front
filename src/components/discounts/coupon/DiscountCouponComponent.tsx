@@ -7,7 +7,7 @@ import VisibilityIcon from "../../../assets/VisibilityIcon";
 import GroupIcon from "../../../assets/GroupIcon";
 import CouponControlButton from "./CouponControlButton";
 import CouponInformationComponent from "./CouponInformationComponent";
-import {reserveDiscountCoupon} from "../../../services/discount.service";
+import {MakePublicDiscountCoupon, ReserveDiscountCoupon, UseUpDiscountCoupon} from "../../../services/discount.service";
 import UserReservedComponent from "./UserActionComponent";
 import CouponConfirmationComponent from "./CouponConfirmationComponent";
 
@@ -23,6 +23,7 @@ const DiscountCouponComponent: React.FC<DiscountCouponComponentProps> = ({discou
     const [isUsed, setIsUsed] = useState<boolean>(discountCoupon.status.status === "USED")
     const [tryUse, setTryUse] = useState<boolean>(false)
     const [showConfirmation, setShowConfirmation] = useState<boolean>(false)
+    const [invisible, setInvisible] = useState<boolean>(false)
 
     const onShowHandler = () => {
         if (informationIsOpen) {
@@ -32,7 +33,7 @@ const DiscountCouponComponent: React.FC<DiscountCouponComponentProps> = ({discou
         setInformationIsOpen(prevState => !prevState)
     }
     const onReserveHandler = () => {
-        reserveDiscountCoupon(discountCoupon)
+        ReserveDiscountCoupon(discountCoupon)
             .then(updatedDiscountCoupon => {
                 setIsReserved(updatedDiscountCoupon.status.status === "RESERVED")
                 discountUpdate(updatedDiscountCoupon)
@@ -50,15 +51,39 @@ const DiscountCouponComponent: React.FC<DiscountCouponComponentProps> = ({discou
         setTryUse(true)
     }
 
-    const onConfirmationHandler = () => {
-        setShowConfirmation(false)
+    const selfDestroyer = (discount: IDiscountCoupon) => {
+        setInvisible(true)
+        setTimeout(() => {
+            discountUpdate(discount, true)
+        }, 600)
+    }
+
+
+    const onMakePublicHandler = () => {
+        MakePublicDiscountCoupon(discountCoupon)
+            .then(updatedDiscountCoupon => {
+                selfDestroyer(updatedDiscountCoupon)
+            })
+    }
+
+    const onConfirmationHandler = (confirmationResponse: boolean) => {
+        if (confirmationResponse)
+            UseUpDiscountCoupon(discountCoupon)
+                .then(updatedDiscountCoupon => {
+                    setIsUsed(updatedDiscountCoupon.status.status === "USED")
+                    discountUpdate(updatedDiscountCoupon)
+                    setShowConfirmation(false)
+
+                })
+        else
+            setShowConfirmation(false)
     }
 
     return (
-        <div className={`${style["discount-item"]} ${informationIsOpen && style["show-information"]}`}>
+        <div className={`${style["discount-item"]} ${informationIsOpen && style["show-information"]} ${invisible && style["invisible"]}`}>
             {(isReserved || isUsed) && (
                 <UserReservedComponent reserved={isReserved} used={isUsed}
-                                       user={discountCoupon.status.reserved_by || ""}/>
+                                       user={discountCoupon.status.reserved_by || discountCoupon.status.used_by || ""}/>
             )
             }
             {showConfirmation && (
@@ -78,7 +103,7 @@ const DiscountCouponComponent: React.FC<DiscountCouponComponentProps> = ({discou
                     )}
                     <CouponControlButton text={"Rezerwuj"} Icon={LockIcon} buttonAction={onReserveHandler}/>
                     <CouponControlButton text={"Pokaż"} Icon={VisibilityIcon} buttonAction={onShowHandler}/>
-                    <CouponControlButton text={"Udostępnij"} Icon={GroupIcon} buttonAction={() => null}/>
+                    <CouponControlButton text={"Udostępnij"} Icon={GroupIcon} buttonAction={onMakePublicHandler}/>
                     <CouponControlButton text={"Użyj"} Icon={DoneIcon} buttonAction={onUseHandler}/>
                 </div>
             </div>

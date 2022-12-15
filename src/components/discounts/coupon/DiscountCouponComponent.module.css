@@ -1,4 +1,6 @@
 .discount-item {
+    opacity: 1;
+    transition: opacity 600ms ease-out, transform 600ms;
     position: relative;
     border-radius: 20px;
     border: #f0922e solid 1px;
@@ -10,6 +12,10 @@
     -webkit-box-shadow: 8px 7px 24px -8px rgba(240, 146, 46, 0.7);
     -moz-box-shadow: 8px 7px 24px -8px rgba(240, 146, 46, 0.7);
     box-shadow: 8px 7px 24px -8px rgba(240, 146, 46, 0.7);
+}
+.discount-item.invisible{
+    opacity: 0;
+    transform: scale(0.01);
 }
 
 .discount-item-container {

@@ -17,9 +17,23 @@ const getDiscountCoupons = () => {
             return response.data;
         });
 }
-export const reserveDiscountCoupon = (discountCoupon: IDiscountCoupon) => {
+export const ReserveDiscountCoupon = (discountCoupon: IDiscountCoupon) => {
     return axios
         .post(`${API_URL}discount-coupon/${discountCoupon.id}/make_reservation/` ,{}, {headers: authHeader()})
+        .then((response: AxiosResponse<IDiscountCoupon>) => {
+            return response.data;
+        });
+}
+export const UseUpDiscountCoupon = (discountCoupon: IDiscountCoupon) => {
+    return axios
+        .post(`${API_URL}discount-coupon/${discountCoupon.id}/use_up/` ,{}, {headers: authHeader()})
+        .then((response: AxiosResponse<IDiscountCoupon>) => {
+            return response.data;
+        });
+}
+export const MakePublicDiscountCoupon = (discountCoupon: IDiscountCoupon) => {
+    return axios
+        .post(`${API_URL}discount-coupon/${discountCoupon.id}/set_public/` ,{}, {headers: authHeader()})
         .then((response: AxiosResponse<IDiscountCoupon>) => {
             return response.data;
         });
