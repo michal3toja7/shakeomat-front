@@ -1,25 +1,26 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import style from './ControlPanelComponent.module.css'
 import ContentSwitcherComponent from "./ContentSwitcherComponent";
 import IContentSwitcher from "../../../types/contentSwitcher.type";
 import findInList from "../../../helpers/findInList";
+import {useSearchParams} from "react-router-dom";
 
 
 type ControlPanelComponentProps = {}
 
 const initContentSwitcher: IContentSwitcher[] = [
     {
-        key: "PRIVATE",
+        key: "private",
         isSelected: true,
         text: "twoje zniżki",
     },
     {
-        key: "PUBLIC",
+        key: "public",
         isSelected: false,
         text: "zniżki publiczne",
     },
     {
-        key: "RESERVED",
+        key: "reserved",
         isSelected: false,
         text: "zarezerwowane",
     }
@@ -28,6 +29,12 @@ const initContentSwitcher: IContentSwitcher[] = [
 
 const ControlPanelComponent: React.FC<ControlPanelComponentProps> = () => {
     const [contentSwitchers, setContentSwitchers] = useState<IContentSwitcher[]>(initContentSwitcher)
+    const [searchParams, setSearchParams] = useSearchParams()
+    useEffect(() => {
+        let index = findInList(contentSwitchers, "isSelected", true)
+        searchParams.set('type', contentSwitchers[index].key);
+        setSearchParams(searchParams)
+    }, []);
 
     const updateSwitchersList = (list: IContentSwitcher[], index: number) => {
         for (let item of list) {
@@ -41,7 +48,11 @@ const ControlPanelComponent: React.FC<ControlPanelComponentProps> = () => {
         let index = findInList(contentSwitchers, "key", switcherKey)
         setContentSwitchers(prevState => {
             return [...updateSwitchersList(prevState, index)]
+
         })
+        searchParams.set('type', switcherKey);
+        setSearchParams(searchParams)
+
 
     }
 

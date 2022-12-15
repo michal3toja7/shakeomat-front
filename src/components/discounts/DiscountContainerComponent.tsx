@@ -3,18 +3,24 @@ import style from './DiscountContainerComponent.module.css'
 import IDiscountCoupon from "../../types/discountCoupon.type";
 import DiscountCouponComponent from "./coupon/DiscountCouponComponent";
 import getDiscountCoupons from "../../services/discount.service";
+import {useSearchParams} from "react-router-dom";
 
 
 type DiscountContainerComponentProps = {}
 
 const DiscountContainerComponent: React.FC<DiscountContainerComponentProps> = () => {
     const [discountCoupons, setDiscountCoupons] = useState<IDiscountCoupon[]>()
+    const [searchParams] = useSearchParams()
+    const getType = () => {
+        return searchParams.get("type") || "private"
+    }
+
 
     useEffect(() => {
-        getDiscountCoupons().then(result => {
+        getDiscountCoupons(getType()).then(result => {
             setDiscountCoupons(result.results)
         })
-    }, []);
+    }, [searchParams]);
 
     const discountsUpdate = (discount: IDiscountCoupon, remove: boolean = false) => {
         if (!discountCoupons)
