@@ -7,4 +7,10 @@
     column-gap: 30px;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-between;
+}
+@media (max-width: 800px) {
+    .discount-container{
+        justify-content: center;
+    }
 }

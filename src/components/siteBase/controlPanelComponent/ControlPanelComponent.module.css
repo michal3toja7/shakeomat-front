@@ -68,6 +68,13 @@
         padding-inline: 5px;
     }
 }
+@media (max-width: 400px) {
+    .content-switcher {
+        min-width: fit-content;
+        font-size: 15px;
+        padding-inline: 5px;
+    }
+}
 
 
 .content-switcher:hover {
