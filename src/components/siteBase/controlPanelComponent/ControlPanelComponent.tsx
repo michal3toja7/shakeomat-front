@@ -9,17 +9,17 @@ type ControlPanelComponentProps = {}
 
 const initContentSwitcher: IContentSwitcher[] = [
     {
-        key: "group",
+        key: "PRIVATE",
         isSelected: true,
         text: "twoje zniżki",
     },
     {
-        key: "public",
+        key: "PUBLIC",
         isSelected: false,
         text: "zniżki publiczne",
     },
     {
-        key: "reserved",
+        key: "RESERVED",
         isSelected: false,
         text: "zarezerwowane",
     }

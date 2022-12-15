@@ -7,7 +7,12 @@ import VisibilityIcon from "../../../assets/VisibilityIcon";
 import GroupIcon from "../../../assets/GroupIcon";
 import CouponControlButton from "./CouponControlButton";
 import CouponInformationComponent from "./CouponInformationComponent";
-import {MakePublicDiscountCoupon, ReserveDiscountCoupon, UseUpDiscountCoupon} from "../../../services/discount.service";
+import {
+    MakePublicDiscountCoupon,
+    ReserveDiscountCoupon,
+    UndoReserveDiscountCoupon,
+    UseUpDiscountCoupon
+} from "../../../services/discount.service";
 import UserReservedComponent from "./UserActionComponent";
 import CouponConfirmationComponent from "./CouponConfirmationComponent";
 
@@ -65,6 +70,12 @@ const DiscountCouponComponent: React.FC<DiscountCouponComponentProps> = ({discou
                 selfDestroyer(updatedDiscountCoupon)
             })
     }
+    const onUndoReservationHandler = () => {
+        UndoReserveDiscountCoupon(discountCoupon)
+            .then(updatedDiscountCoupon => {
+                selfDestroyer(updatedDiscountCoupon)
+            })
+    }
 
     const onConfirmationHandler = (confirmationResponse: boolean) => {
         if (confirmationResponse)
@@ -80,7 +91,8 @@ const DiscountCouponComponent: React.FC<DiscountCouponComponentProps> = ({discou
     }
 
     return (
-        <div className={`${style["discount-item"]} ${informationIsOpen && style["show-information"]} ${invisible && style["invisible"]}`}>
+        <div
+            className={`${style["discount-item"]} ${informationIsOpen && style["show-information"]} ${invisible && style["invisible"]}`}>
             {(isReserved || isUsed) && (
                 <UserReservedComponent reserved={isReserved} used={isUsed}
                                        user={discountCoupon.status.reserved_by || discountCoupon.status.used_by || ""}/>

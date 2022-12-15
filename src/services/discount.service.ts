@@ -9,31 +9,49 @@ type DicountCouponsResponse = {
     previous: string | null,
     results: IDiscountCoupon[]
 }
+const DISCOUNTS_TYPE: { [id: string]: string; } = {
+    "PRIVATE": "discount-coupon/",
+    "PUBLIC": "discount-public-coupon/",
+    "RESERVED": "discount-reserved-coupon/"
 
-const getDiscountCoupons = () => {
+}
+
+const getDiscountURL = (type: string) => {
+    return API_URL + DISCOUNTS_TYPE[type]
+}
+
+const getDiscountCoupons = (type: string = "PRIVATE") => {
+
     return axios
-        .get(API_URL + "discount-coupon/", {headers: authHeader()})
+        .get(getDiscountURL(type), {headers: authHeader()})
         .then((response: AxiosResponse<DicountCouponsResponse>) => {
             return response.data;
         });
 }
-export const ReserveDiscountCoupon = (discountCoupon: IDiscountCoupon) => {
+export const ReserveDiscountCoupon = (discountCoupon: IDiscountCoupon, type: string = "PRIVATE") => {
     return axios
-        .post(`${API_URL}discount-coupon/${discountCoupon.id}/make_reservation/` ,{}, {headers: authHeader()})
+        .post(`${getDiscountURL(type)}${discountCoupon.id}/make_reservation/`, {}, {headers: authHeader()})
         .then((response: AxiosResponse<IDiscountCoupon>) => {
             return response.data;
         });
 }
-export const UseUpDiscountCoupon = (discountCoupon: IDiscountCoupon) => {
+export const UseUpDiscountCoupon = (discountCoupon: IDiscountCoupon, type: string = "PRIVATE") => {
     return axios
-        .post(`${API_URL}discount-coupon/${discountCoupon.id}/use_up/` ,{}, {headers: authHeader()})
+        .post(`${getDiscountURL(type)}${discountCoupon.id}/use_up/`, {}, {headers: authHeader()})
         .then((response: AxiosResponse<IDiscountCoupon>) => {
             return response.data;
         });
 }
-export const MakePublicDiscountCoupon = (discountCoupon: IDiscountCoupon) => {
+export const MakePublicDiscountCoupon = (discountCoupon: IDiscountCoupon, type: string = "PRIVATE") => {
     return axios
-        .post(`${API_URL}discount-coupon/${discountCoupon.id}/set_public/` ,{}, {headers: authHeader()})
+        .post(`${getDiscountURL(type)}${discountCoupon.id}/set_public/`, {}, {headers: authHeader()})
+        .then((response: AxiosResponse<IDiscountCoupon>) => {
+            return response.data;
+        });
+}
+export const UndoReserveDiscountCoupon = (discountCoupon: IDiscountCoupon, type: string = "PRIVATE") => {
+    return axios
+        .post(`${getDiscountURL(type)}${discountCoupon.id}/undo_reservation/`, {}, {headers: authHeader()})
         .then((response: AxiosResponse<IDiscountCoupon>) => {
             return response.data;
         });
