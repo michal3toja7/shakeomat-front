@@ -1,6 +1,7 @@
 import React from "react";
 import CouponModalContainer from "./CouponModalContainer";
 import style from './DiscountCouponModal.module.css'
+import Button from "../../siteBase/Button";
 
 
 type Props = {
@@ -12,7 +13,6 @@ type Props = {
 const CouponConfirmationComponent: React.FC<Props> = ({verification = true, confirmationLiftUp}) => {
     const title = verification ? "Czy na pewno chcesz wykorzystać kupon?" : "Czy wykorzystałeś kupon?"
     const onAnswerHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
-
         confirmationLiftUp(e.currentTarget.value === "true")
     }
 
@@ -23,8 +23,8 @@ const CouponConfirmationComponent: React.FC<Props> = ({verification = true, conf
                 {title}
             </div>
             <div className={style["confirmation-container"]}>
-                <button className={`${style["btn"]} ${style["secondary"]}`} value="false" onClick={onAnswerHandler}>Nie</button>
-                <button className={`${style["btn"]} ${style["primary"]}`} value="true" onClick={onAnswerHandler}>Tak</button>
+                <Button value="false" onClick={onAnswerHandler} buttonText={"Nie"} primary={false}></Button>
+                <Button value={"true"} onClick={onAnswerHandler} buttonText={"Tak"} primary={true}></Button>
             </div>
             <div className={style["after-text"]}>Tego nie cofniesz wariacie 🤙</div>
         </CouponModalContainer>
