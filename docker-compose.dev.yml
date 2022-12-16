@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  app:
+    container_name: app-dev
+    image: shakeomat-front
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./src:/shakeomat-front/src
+    ports:
+      - 3000:3000
+s
