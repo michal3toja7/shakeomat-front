@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
-import style from './ControlPanelComponent.module.css'
-import ContentSwitcherComponent from "./ContentSwitcherComponent";
 import IContentSwitcher from "../../../types/contentSwitcher.type";
 import findInList from "../../../helpers/findInList";
 import {useSearchParams} from "react-router-dom";
+import {Tab, Tabs} from "@mui/material";
+import Box from "@mui/material/Box";
 
 
 type ControlPanelComponentProps = {}
@@ -29,10 +29,12 @@ const initContentSwitcher: IContentSwitcher[] = [
 
 const ControlPanelComponent: React.FC<ControlPanelComponentProps> = () => {
     const [contentSwitchers, setContentSwitchers] = useState<IContentSwitcher[]>(initContentSwitcher)
+    const [isSelected, setIsSelected] = useState<string>("")
     const [searchParams, setSearchParams] = useSearchParams()
     useEffect(() => {
         let index = findInList(contentSwitchers, "isSelected", true)
         searchParams.set('type', contentSwitchers[index].key);
+        setIsSelected(contentSwitchers[index].key)
         setSearchParams(searchParams)
     }, []);
 
@@ -44,12 +46,13 @@ const ControlPanelComponent: React.FC<ControlPanelComponentProps> = () => {
         return list
     }
 
-    const contentSwitcherHandler = (switcherKey: string) => {
+    const contentSwitcherHandler = (event: React.SyntheticEvent, switcherKey: string) => {
         let index = findInList(contentSwitchers, "key", switcherKey)
         setContentSwitchers(prevState => {
             return [...updateSwitchersList(prevState, index)]
 
         })
+        setIsSelected(switcherKey)
         searchParams.set('type', switcherKey);
         setSearchParams(searchParams)
 
@@ -57,24 +60,22 @@ const ControlPanelComponent: React.FC<ControlPanelComponentProps> = () => {
     }
 
     return (
-        <div className={style["control"]}>
-            <div className={style["control-container"]}>
-
-                <div className={style["switch-container"]}>
+        <Box sx={
+            {
+                position: "fixed",
+                width: "100%",
+                bottom: 0
+            }
+        }>
+                <Tabs value={isSelected} centered onChange={contentSwitcherHandler}>
                     {contentSwitchers.map((contentSwitcher) => {
                         return (
-                            <ContentSwitcherComponent key={contentSwitcher.key}
-                                                      isSelected={contentSwitcher.isSelected}
-                                                      contentSwitcher={contentSwitcherHandler}
-                                                      switcherKey={contentSwitcher.key}
-                            >
-                                {contentSwitcher.text}
-                            </ContentSwitcherComponent>
+                            <Tab value={contentSwitcher.key} key={contentSwitcher.key} label={contentSwitcher.text}/>
                         )
                     })}
-                </div>
-            </div>
-        </div>
+                </Tabs>
+        </Box>
+
     )
 }
 

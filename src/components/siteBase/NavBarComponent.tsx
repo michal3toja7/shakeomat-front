@@ -25,7 +25,7 @@ function ResponsiveAppBar() {
     };
 
     return (
-        <AppBar position="fixed" color={"default"}>
+        <AppBar position="sticky" color={"default"}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
 
