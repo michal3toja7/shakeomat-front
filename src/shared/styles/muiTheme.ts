@@ -38,7 +38,7 @@ export const baseTheme: ThemeOptions = {
                     fontWeight: 700,
                     paddingInline: 15,
                     textTransform: "none",
-                    border: 4 ,
+                    border: 4,
                     borderStyle: "solid",
                     borderColor: themePalette.palette.third.main,
                     transform: "skew(-15deg)"
@@ -48,7 +48,8 @@ export const baseTheme: ThemeOptions = {
         MuiTabs: {
             styleOverrides: {
                 root: {
-                    marginBottom: "1em"
+                    marginBottom: "0.5em",
+                    marginTop: "0.5em",
                 },
                 flexContainer: {
                     transform: "skew(-15deg)",
@@ -57,8 +58,6 @@ export const baseTheme: ThemeOptions = {
                     height: 0,
                     display: "none",
                 },
-
-
             },
         },
         MuiTab: {
@@ -69,7 +68,7 @@ export const baseTheme: ThemeOptions = {
 
                     color: "#000000",
                     textTransform: "none",
-                    border: 4 ,
+                    border: 4,
                     borderStyle: "solid",
                     borderColor: themePalette.palette.third.main,
                     borderRight: "none",
@@ -78,7 +77,7 @@ export const baseTheme: ThemeOptions = {
                         color: "#FFFFFF",
                     },
                     "&:last-child": {
-                        border: 5 ,
+                        border: 5,
                         borderStyle: "solid",
                         borderColor: themePalette.palette.third.main,
                     }
@@ -86,6 +85,41 @@ export const baseTheme: ThemeOptions = {
 
             },
         },
+        MuiCard: {
+            styleOverrides: {
+                root: {
+                    border: 1,
+                    borderStyle: "solid",
+                    borderRadius: 10,
+                    backgroundColor: themePalette.palette.primary.main,
+                    borderColor: themePalette.palette.third.main,
+                    // width: 400,
+                    maxWidth: 350,
+                    minWidth: 350,
+                }
+            }
+        },
+        MuiCardMedia: {
+            styleOverrides: {
+                root: {
+                    height: 420,
+                    backgroundColor: themePalette.palette.background.default,
+                }
+            }
+        },
+        MuiGrid: {
+            styleOverrides: {
+                root: {
+                    rowGap:40,
+                    justifyContent: "center",
+                    alignItems: "center"
+                },
+                item: {
+                    display:'flex',
+                    justifyContent:'center'
+                }
+            }
+        }
 
     }
 
