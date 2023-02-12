@@ -20,7 +20,7 @@ import {
     Card,
     CardActions,
     CardMedia,
-    Fab,
+    Fab, Fade
 } from "@mui/material";
 import Box from "@mui/material/Box";
 
@@ -104,75 +104,77 @@ const DiscountCouponComponent: React.FC<DiscountCouponComponentProps> = ({
     }
 
     return (
-        // <div
-        //     className={`${style["discount-item"]} ${informationIsOpen && style["show-information"]} ${invisible && style["invisible"]}`}>
-        //     {((isReserved && discountsType!=="reserved") || isUsed) && (
-        //         <UserReservedComponent reserved={(isReserved&& discountsType!=="reserved")} used={isUsed}
-        //                                user={discountCoupon.status.reserved_by || discountCoupon.status.used_by || ""}/>
-        //     )
-        //     }
-        //     {showConfirmation && (
-        //         <CouponConfirmationComponent confirmationLiftUp={onConfirmationHandler} verification={tryUse}/>
-        //     )
-        //     }
-        //
-        // </div>
-        <Card>
-            <CardMedia
-                component="img"
-                image={discountCoupon.discount_image}
-                alt={discountCoupon.discount_title || ""}
-                sx={{objectFit: "contain"}}
-            />
-
-            <CardActions>
-                <Box
-                    sx={{
-                        position: "absolute",
-                        bottom: "100%",
-                        left: 0,
-                        width: "100%",
-                        height: "fit-content",
-                    }}
-                >
-                    <Accordion expanded={informationIsOpen}>
-                        <AccordionSummary/>
-                        <AccordionDetails>
-                            <CouponInformationComponent couponCard={discountCoupon.discount_card}
-                                                        setIsClose={onCloseInformation}/>
-                        </AccordionDetails>
-                    </Accordion>
-                </Box>
-                {discountsType !== "reserved" &&
-                    <Fab onClick={onReserveHandler}>
-                        <LockIcon fontSize={"large"}/>
-                        Rezerwuj
-                    </Fab>
+        <Fade in={!invisible}>
+            <Card>
+                <CardMedia
+                    component="img"
+                    image={discountCoupon.discount_image}
+                    alt={discountCoupon.discount_title || ""}
+                    sx={{objectFit: "contain"}}
+                />
+                {((isReserved && discountsType !== "reserved") || isUsed) && (
+                    <UserReservedComponent reserved={(isReserved && discountsType !== "reserved")} used={isUsed}
+                                           user={discountCoupon.status.reserved_by || discountCoupon.status.used_by || ""}/>
+                )
                 }
-                {discountsType === "reserved" &&
-                    <Fab onClick={onUndoReservationHandler}>
-                        <LockOpenIcon fontSize={"large"}/>
-                        Odblokuj
-                    </Fab>
-                }
-                <Fab onClick={onShowHandler}>
-                    <VisibilityIcon fontSize={"large"}/>
-                    Pokaż
-                </Fab>
+                {showConfirmation && (
+                    <CouponConfirmationComponent confirmationLiftUp={onConfirmationHandler} verification={tryUse}/>
+                )}
 
-                {discountsType === "private" &&
-                    <Fab onClick={onMakePublicHandler}>
-                        <GroupIcon fontSize={"large"}/>
-                        Udostępnij
+                <CardActions>
+                    <Box
+                        sx={{
+                            position: "absolute",
+                            bottom: "100%",
+                            left: 0,
+                            width: "100%",
+                            height: "fit-content",
+                        }}
+                    >
+                        <Accordion expanded={informationIsOpen}>
+                            <AccordionSummary/>
+                            <AccordionDetails>
+                                <CouponInformationComponent couponCard={discountCoupon.discount_card}
+                                                            setIsClose={onCloseInformation}/>
+                            </AccordionDetails>
+                        </Accordion>
+                    </Box>
+                    {discountsType !== "reserved" &&
+                        <Fab onClick={onReserveHandler}
+                             disabled={((isReserved && discountsType !== "reserved") || isUsed || showConfirmation)}>
+                            <LockIcon fontSize={"large"}/>
+                            Rezerwuj
+                        </Fab>
+                    }
+                    {discountsType === "reserved" &&
+                        <Fab onClick={onUndoReservationHandler}
+                             disabled={((isReserved && discountsType !== "reserved") || isUsed || showConfirmation)}>
+                            <LockOpenIcon fontSize={"large"}/>
+                            Odblokuj
+                        </Fab>
+                    }
+                    <Fab onClick={onShowHandler}
+                         disabled={((isReserved && discountsType !== "reserved") || isUsed || showConfirmation)}>
+                        <VisibilityIcon fontSize={"large"}/>
+                        Pokaż
                     </Fab>
-                }
-                <Fab onClick={onUseHandler}>
-                    <DoneIcon fontSize={"large"}/>
-                    Użyj
-                </Fab>
 
-            </CardActions>
-        </Card>
+                    {discountsType === "private" &&
+                        <Fab onClick={onMakePublicHandler}
+                             disabled={(isReserved || isUsed || showConfirmation)}>
+                            <GroupIcon fontSize={"large"}/>
+                            Udostępnij
+                        </Fab>
+                    }
+                    <Fab onClick={onUseHandler}
+                         disabled={((isReserved && discountsType !== "reserved") || isUsed || showConfirmation)}>
+                        <DoneIcon fontSize={"large"}/>
+                        Użyj
+                    </Fab>
+
+                </CardActions>
+            </Card>
+        </Fade>
     )
 }
 

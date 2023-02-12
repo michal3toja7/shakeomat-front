@@ -6,6 +6,7 @@ import LoadingModal from "../siteBase/LoadingModal";
 import {Container, Grid} from "@mui/material";
 
 
+
 type DiscountContainerComponentProps = {
     discountsType: string
 }

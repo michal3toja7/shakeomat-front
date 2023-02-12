@@ -104,6 +104,7 @@ export const baseTheme: ThemeOptions = {
                     borderRadius: 10,
                     backgroundColor: themePalette.palette.primary.main,
                     borderColor: themePalette.palette.third.main,
+                    position: "relative",
                     // width: 400,
                     maxWidth: 350,
                     minWidth: 350,
@@ -123,7 +124,7 @@ export const baseTheme: ThemeOptions = {
                 root: {
                     position: "relative",
                     display: "flex",
-                    justifyContent: "space-between",
+                    justifyContent: "space-around",
                     padding: "15px 10px 5px 10px"
                 }
             }
@@ -174,6 +175,9 @@ export const baseTheme: ThemeOptions = {
                     "&:hover": {
                         transform: "scale3d(1.1, 1.1, 1)",
                     },
+                    "&:disabled": {
+                        backgroundColor: "transparent"
+                    }
                 },
             }
         }

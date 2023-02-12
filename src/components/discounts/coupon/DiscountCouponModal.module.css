@@ -9,7 +9,7 @@
     bottom: 0;
     right: 0;
     backdrop-filter: blur(3px) grayscale(100%);
-    z-index: 1;
+    z-index: 1051;
     opacity: 1;
     transition: opacity 400ms;
 }
@@ -33,6 +33,7 @@
     font-family: Arial, serif;
     font-style: italic;
     font-weight: bold;
+    text-align: center;
 }
 
 .item-modal.rotated {
