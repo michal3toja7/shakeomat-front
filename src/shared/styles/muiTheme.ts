@@ -32,7 +32,10 @@ export const baseTheme: ThemeOptions = {
     },
     components: {
         MuiButton: {
-
+            defaultProps: {
+                variant: "contained",
+                color: "primary"
+            },
             styleOverrides: {
                 root: {
                     fontWeight: 700,

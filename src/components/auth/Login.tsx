@@ -3,9 +3,9 @@ import {NavigateFunction, useNavigate} from 'react-router-dom';
 import style from './Login.module.css'
 
 import {login} from "../../services/auth.service";
-import Button from "../siteBase/Button";
 import LogoSVG from "../../assets/LogoSVG";
 import LoadingModal from "../siteBase/LoadingModal";
+import {Button} from "@mui/material";
 
 type LoginProps = {}
 
@@ -15,7 +15,7 @@ const Login: React.FC<LoginProps> = () => {
 
         const [loading, setLoading] = useState<boolean>(false);
         const [message, setMessage] = useState<string>("");
-        const [errorMessage, setErrorMessage] = useState<string>("");
+        const [, setErrorMessage] = useState<string>("");
         const [isValidUserName, setIsValidUserName] = useState<boolean>(true);
         const [userName, setUserName] = useState<string>("");
         const [isValidPassword, setIsValidPassword] = useState<boolean>(true);
@@ -105,7 +105,9 @@ const Login: React.FC<LoginProps> = () => {
 
                                 </div>
                             <div className={`${style["form-group"]} ${style["button"]}`}>
-                                <Button buttonText={"Zaloguj"} onClick={handleLogin} disabled={loading}/>
+                                <Button onClick={handleLogin} disabled={loading}>
+                                    Zaloguj
+                                </Button>
                             </div>
                         </form>
                         <LoadingModal isLoading={loading} loadingMassage={message}/>
