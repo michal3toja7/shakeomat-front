@@ -113,14 +113,35 @@ export const baseTheme: ThemeOptions = {
         MuiGrid: {
             styleOverrides: {
                 root: {
-                    rowGap:40,
+                    rowGap: 40,
                     justifyContent: "center",
                     alignItems: "center"
                 },
                 item: {
-                    display:'flex',
-                    justifyContent:'center'
+                    display: 'flex',
+                    justifyContent: 'center'
                 }
+            }
+        },
+        MuiFab: {
+            defaultProps: {
+                color: "primary",
+                variant: "extended",
+                size: "large"
+            },
+            styleOverrides: {
+                extended: {
+                    flexDirection: "column",
+                    backgroundColor: "transparent",
+                    textTransform: "none",
+                    boxShadow: "none",
+                    borderRadius: 10,
+                    padding: 5,
+                    transition: "transform 600ms, background 600ms",
+                    "&:hover": {
+                        transform: "scale3d(1.1, 1.1, 1)",
+                    },
+                },
             }
         }
 

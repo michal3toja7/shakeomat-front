@@ -49,6 +49,7 @@ const DiscountContainerComponent: React.FC<DiscountContainerComponentProps> = ({
                                 <DiscountCouponComponent key={discountCoupon.id}
                                                          discountCoupon={discountCoupon}
                                                          discountUpdate={discountsUpdate}
+                                                         discountsType={discountsType}
                                 />
                             </Grid>
                         )

@@ -72,7 +72,8 @@ const ControlDiscountAppComponent: React.FC<ControlPanelComponentProps> = () => 
                         boxShadow:"0px -2px 4px -1px rgb(0 0 0 / 20%), 0px -4px 5px 0px rgb(0 0 0 / 14%), 0px -1px 10px 0px rgb(0 0 0 / 12%)",
                         position: "fixed",
                         width: "100%",
-                        bottom: 0
+                        bottom: 0,
+                        zIndex: 1060
                     }
                 }>
                     <Tabs value={isSelected} centered onChange={contentSwitcherHandler}>

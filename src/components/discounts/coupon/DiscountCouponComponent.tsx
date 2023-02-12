@@ -1,10 +1,11 @@
 import React, {useState} from "react";
 import style from './DiscountCouponComponent.module.css'
 import IDiscountCoupon from "../../../types/discountCoupon.type";
-import DoneIcon from "../../../assets/DoneIcon";
-import LockIcon from "../../../assets/LockIcon";
-import VisibilityIcon from "../../../assets/VisibilityIcon";
-import GroupIcon from "../../../assets/GroupIcon";
+import DoneIcon from '@mui/icons-material/Done';
+import GroupIcon from '@mui/icons-material/Group';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import LockIcon from '@mui/icons-material/Lock';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
 import CouponControlButton from "./CouponControlButton";
 import CouponInformationComponent from "./CouponInformationComponent";
 import {
@@ -16,25 +17,28 @@ import {
 import UserReservedComponent from "./UserActionComponent";
 import CouponConfirmationComponent from "./CouponConfirmationComponent";
 import {useSearchParams} from "react-router-dom";
-import UnlockIcon from "../../../assets/UnlockIcon";
+import {Button, Card, CardActions, CardContent, CardMedia, Fab, Typography} from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import Box from "@mui/material/Box";
 
 
 type DiscountCouponComponentProps = {
     discountCoupon: IDiscountCoupon,
-    discountUpdate: Function
+    discountUpdate: Function,
+    discountsType: string
 }
 
-const DiscountCouponComponent: React.FC<DiscountCouponComponentProps> = ({discountCoupon, discountUpdate}) => {
+const DiscountCouponComponent: React.FC<DiscountCouponComponentProps> = ({
+                                                                             discountCoupon,
+                                                                             discountUpdate,
+                                                                             discountsType
+                                                                         }) => {
     const [informationIsOpen, setInformationIsOpen] = useState<boolean>(false)
     const [isReserved, setIsReserved] = useState<boolean>(discountCoupon.status.status === "RESERVED")
     const [isUsed, setIsUsed] = useState<boolean>(discountCoupon.status.status === "USED")
     const [tryUse, setTryUse] = useState<boolean>(false)
     const [showConfirmation, setShowConfirmation] = useState<boolean>(false)
     const [invisible, setInvisible] = useState<boolean>(false)
-    const [searchParams] = useSearchParams()
-    const getType = () => {
-        return searchParams.get("type") || "private"
-    }
 
     const onShowHandler = () => {
         if (informationIsOpen) {
@@ -44,7 +48,7 @@ const DiscountCouponComponent: React.FC<DiscountCouponComponentProps> = ({discou
         setInformationIsOpen(prevState => !prevState)
     }
     const onReserveHandler = () => {
-        ReserveDiscountCoupon(discountCoupon, getType())
+        ReserveDiscountCoupon(discountCoupon, discountsType)
             .then(updatedDiscountCoupon => {
                 setIsReserved(updatedDiscountCoupon.status.status === "RESERVED")
                 discountUpdate(updatedDiscountCoupon)
@@ -71,13 +75,13 @@ const DiscountCouponComponent: React.FC<DiscountCouponComponentProps> = ({discou
 
 
     const onMakePublicHandler = () => {
-        MakePublicDiscountCoupon(discountCoupon, getType())
+        MakePublicDiscountCoupon(discountCoupon, discountsType)
             .then(updatedDiscountCoupon => {
                 selfDestroyer(updatedDiscountCoupon)
             })
     }
     const onUndoReservationHandler = () => {
-        UndoReserveDiscountCoupon(discountCoupon, getType())
+        UndoReserveDiscountCoupon(discountCoupon, discountsType)
             .then(updatedDiscountCoupon => {
                 selfDestroyer(updatedDiscountCoupon)
             })
@@ -85,7 +89,7 @@ const DiscountCouponComponent: React.FC<DiscountCouponComponentProps> = ({discou
 
     const onConfirmationHandler = (confirmationResponse: boolean) => {
         if (confirmationResponse)
-            UseUpDiscountCoupon(discountCoupon, getType())
+            UseUpDiscountCoupon(discountCoupon, discountsType)
                 .then(updatedDiscountCoupon => {
                     setIsUsed(updatedDiscountCoupon.status.status === "USED")
                     discountUpdate(updatedDiscountCoupon)
@@ -97,43 +101,91 @@ const DiscountCouponComponent: React.FC<DiscountCouponComponentProps> = ({discou
     }
 
     return (
-        <div
-            className={`${style["discount-item"]} ${informationIsOpen && style["show-information"]} ${invisible && style["invisible"]}`}>
-            {((isReserved && getType()!=="reserved") || isUsed) && (
-                <UserReservedComponent reserved={(isReserved&& getType()!=="reserved")} used={isUsed}
-                                       user={discountCoupon.status.reserved_by || discountCoupon.status.used_by || ""}/>
-            )
-            }
-            {showConfirmation && (
-                <CouponConfirmationComponent confirmationLiftUp={onConfirmationHandler} verification={tryUse}/>
-            )
-            }
+        // <div
+        //     className={`${style["discount-item"]} ${informationIsOpen && style["show-information"]} ${invisible && style["invisible"]}`}>
+        //     {((isReserved && discountsType!=="reserved") || isUsed) && (
+        //         <UserReservedComponent reserved={(isReserved&& discountsType!=="reserved")} used={isUsed}
+        //                                user={discountCoupon.status.reserved_by || discountCoupon.status.used_by || ""}/>
+        //     )
+        //     }
+        //     {showConfirmation && (
+        //         <CouponConfirmationComponent confirmationLiftUp={onConfirmationHandler} verification={tryUse}/>
+        //     )
+        //     }
+        //
+        //     <div className={style["discount-item-container"]}>
+        //         <div className={style["image-container"]}>
+        //             <img src={discountCoupon.discount_image} alt={discountCoupon.discount_title || ""}></img>
+        //         </div>
+        //         <div className={style["item-control-container"]} style={{position: "relative"}}>
+        //             {informationIsOpen && (
+        //                 <CouponInformationComponent couponCard={discountCoupon.discount_card}
+        //                                             isOpen={informationIsOpen}
+        //                                             setIsClose={onCloseInformation}/>
+        //             )}
+        //             {discountsType !== "reserved" &&
+        //                 <CouponControlButton text={"Rezerwuj"} Icon={LockIcon} buttonAction={onReserveHandler}/>
+        //             }
+        //             {discountsType === "reserved" &&
+        //                 <CouponControlButton text={"Odblokuj"} Icon={UnlockIcon} buttonAction={onUndoReservationHandler}/>
+        //             }
+        //             <CouponControlButton text={"Pokaż"} Icon={VisibilityIcon} buttonAction={onShowHandler}/>
+        //             {discountsType==="private" &&
+        //                 <CouponControlButton text={"Udostępnij"} Icon={GroupIcon} buttonAction={onMakePublicHandler}/>
+        //             }
+        //             <CouponControlButton text={"Użyj"} Icon={DoneIcon} buttonAction={onUseHandler}/>
+        //         </div>
+        //     </div>
+        // </div>
+        <Card>
+            <CardMedia
+                component="img"
+                width="100%"
+                image={discountCoupon.discount_image}
+                alt={discountCoupon.discount_title || ""}
+                sx={{objectFit: "contain"}}
+            />
+            <CardContent>
+                <CouponInformationComponent couponCard={discountCoupon.discount_card}
+                                            isOpen={informationIsOpen}
+                                            setIsClose={onCloseInformation}/>
+            </CardContent>
+            <CardActions>
+                {informationIsOpen && (
+                    <CouponInformationComponent couponCard={discountCoupon.discount_card}
+                                                isOpen={informationIsOpen}
+                                                setIsClose={onCloseInformation}/>
+                )}
+                {discountsType !== "reserved" &&
+                    <Fab onClick={onReserveHandler}>
+                        <LockIcon fontSize={"large"}/>
+                        Rezerwuj
+                    </Fab>
+                }
+                {discountsType === "reserved" &&
+                    <Fab onClick={onUndoReservationHandler}>
+                        <LockOpenIcon fontSize={"large"}/>
+                        Odblokuj
+                    </Fab>
+                }
+                <Fab onClick={onShowHandler}>
+                    <VisibilityIcon fontSize={"large"}/>
+                    Pokaż
+                </Fab>
 
-            <div className={style["discount-item-container"]}>
-                <div className={style["image-container"]}>
-                    <img src={discountCoupon.discount_image} alt={discountCoupon.discount_title || ""}></img>
-                </div>
-                <div className={style["item-control-container"]} style={{position: "relative"}}>
-                    {informationIsOpen && (
-                        <CouponInformationComponent couponCard={discountCoupon.discount_card}
-                                                    isOpen={informationIsOpen}
-                                                    setIsClose={onCloseInformation}/>
-                    )}
-                    {getType() !== "reserved" &&
-                        <CouponControlButton text={"Rezerwuj"} Icon={LockIcon} buttonAction={onReserveHandler}/>
-                    }
-                    {getType() === "reserved" &&
-                        <CouponControlButton text={"Odblokuj"} Icon={UnlockIcon} buttonAction={onUndoReservationHandler}/>
-                    }
-                    <CouponControlButton text={"Pokaż"} Icon={VisibilityIcon} buttonAction={onShowHandler}/>
-                    {getType()==="private" &&
-                        <CouponControlButton text={"Udostępnij"} Icon={GroupIcon} buttonAction={onMakePublicHandler}/>
-                    }
-                    <CouponControlButton text={"Użyj"} Icon={DoneIcon} buttonAction={onUseHandler}/>
-                </div>
-            </div>
-        </div>
+                {discountsType === "private" &&
+                    <Fab onClick={onMakePublicHandler}>
+                        <GroupIcon fontSize={"large"}/>
+                        Udostępnij
+                    </Fab>
+                }
+                <Fab onClick={onUseHandler}>
+                    <DoneIcon fontSize={"large"}/>
+                    Użyj
+                </Fab>
 
+            </CardActions>
+        </Card>
     )
 }
 
