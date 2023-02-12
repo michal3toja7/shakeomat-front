@@ -1,12 +1,10 @@
 import React, {useState} from "react";
-import style from './DiscountCouponComponent.module.css'
 import IDiscountCoupon from "../../../types/discountCoupon.type";
 import DoneIcon from '@mui/icons-material/Done';
 import GroupIcon from '@mui/icons-material/Group';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import LockIcon from '@mui/icons-material/Lock';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
-import CouponControlButton from "./CouponControlButton";
 import CouponInformationComponent from "./CouponInformationComponent";
 import {
     MakePublicDiscountCoupon,
@@ -16,9 +14,14 @@ import {
 } from "../../../services/discount.service";
 import UserReservedComponent from "./UserActionComponent";
 import CouponConfirmationComponent from "./CouponConfirmationComponent";
-import {useSearchParams} from "react-router-dom";
-import {Button, Card, CardActions, CardContent, CardMedia, Fab, Typography} from "@mui/material";
-import IconButton from "@mui/material/IconButton";
+import {
+    Accordion, AccordionDetails,
+    AccordionSummary,
+    Card,
+    CardActions,
+    CardMedia,
+    Fab,
+} from "@mui/material";
 import Box from "@mui/material/Box";
 
 
@@ -113,49 +116,33 @@ const DiscountCouponComponent: React.FC<DiscountCouponComponentProps> = ({
         //     )
         //     }
         //
-        //     <div className={style["discount-item-container"]}>
-        //         <div className={style["image-container"]}>
-        //             <img src={discountCoupon.discount_image} alt={discountCoupon.discount_title || ""}></img>
-        //         </div>
-        //         <div className={style["item-control-container"]} style={{position: "relative"}}>
-        //             {informationIsOpen && (
-        //                 <CouponInformationComponent couponCard={discountCoupon.discount_card}
-        //                                             isOpen={informationIsOpen}
-        //                                             setIsClose={onCloseInformation}/>
-        //             )}
-        //             {discountsType !== "reserved" &&
-        //                 <CouponControlButton text={"Rezerwuj"} Icon={LockIcon} buttonAction={onReserveHandler}/>
-        //             }
-        //             {discountsType === "reserved" &&
-        //                 <CouponControlButton text={"Odblokuj"} Icon={UnlockIcon} buttonAction={onUndoReservationHandler}/>
-        //             }
-        //             <CouponControlButton text={"Pokaż"} Icon={VisibilityIcon} buttonAction={onShowHandler}/>
-        //             {discountsType==="private" &&
-        //                 <CouponControlButton text={"Udostępnij"} Icon={GroupIcon} buttonAction={onMakePublicHandler}/>
-        //             }
-        //             <CouponControlButton text={"Użyj"} Icon={DoneIcon} buttonAction={onUseHandler}/>
-        //         </div>
-        //     </div>
         // </div>
         <Card>
             <CardMedia
                 component="img"
-                width="100%"
                 image={discountCoupon.discount_image}
                 alt={discountCoupon.discount_title || ""}
                 sx={{objectFit: "contain"}}
             />
-            <CardContent>
-                <CouponInformationComponent couponCard={discountCoupon.discount_card}
-                                            isOpen={informationIsOpen}
-                                            setIsClose={onCloseInformation}/>
-            </CardContent>
+
             <CardActions>
-                {informationIsOpen && (
-                    <CouponInformationComponent couponCard={discountCoupon.discount_card}
-                                                isOpen={informationIsOpen}
-                                                setIsClose={onCloseInformation}/>
-                )}
+                <Box
+                    sx={{
+                        position: "absolute",
+                        bottom: "100%",
+                        left: 0,
+                        width: "100%",
+                        height: "fit-content",
+                    }}
+                >
+                    <Accordion expanded={informationIsOpen}>
+                        <AccordionSummary/>
+                        <AccordionDetails>
+                            <CouponInformationComponent couponCard={discountCoupon.discount_card}
+                                                        setIsClose={onCloseInformation}/>
+                        </AccordionDetails>
+                    </Accordion>
+                </Box>
                 {discountsType !== "reserved" &&
                     <Fab onClick={onReserveHandler}>
                         <LockIcon fontSize={"large"}/>

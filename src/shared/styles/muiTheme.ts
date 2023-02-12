@@ -24,6 +24,9 @@ export const defaultTheme = responsiveFontSizes(createTheme({}));
 
 // @ts-ignore
 export const baseTheme: ThemeOptions = {
+    typography: {
+        fontSize: 14,
+    },
     palette: {
         ...themePalette.palette,
     },
@@ -34,7 +37,8 @@ export const baseTheme: ThemeOptions = {
         MuiButton: {
             defaultProps: {
                 variant: "contained",
-                color: "primary"
+                color: "primary",
+                size: "medium"
             },
             styleOverrides: {
                 root: {
@@ -45,6 +49,10 @@ export const baseTheme: ThemeOptions = {
                     borderStyle: "solid",
                     borderColor: themePalette.palette.third.main,
                     transform: "skew(-15deg)"
+                },
+                sizeSmall:{
+                    padding: 0,
+                    minWidth: 45
                 }
             },
         },
@@ -107,6 +115,31 @@ export const baseTheme: ThemeOptions = {
                 root: {
                     height: 420,
                     backgroundColor: themePalette.palette.background.default,
+                }
+            }
+        },
+        MuiCardActions: {
+            styleOverrides: {
+                root: {
+                    position: "relative",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    padding: "15px 10px 5px 10px"
+                }
+            }
+        },
+        MuiAccordionSummary: {
+            styleOverrides: {
+                root: {
+                    display: "none"
+                }
+            }
+        },
+        MuiAccordionDetails: {
+            styleOverrides: {
+                root: {
+                    color: "#fff",
+                    backgroundColor: themePalette.palette.primary.main
                 }
             }
         },

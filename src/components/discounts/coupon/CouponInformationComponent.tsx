@@ -1,24 +1,18 @@
 import React, {useEffect, useRef, useState} from "react";
-import style from './DiscountCouponComponent.module.css'
 import {IDiscountCard} from "../../../types/discountCoupon.type";
 import bwipjs from "bwip-js";
+import Box from "@mui/material/Box";
+import {Button, Grid} from "@mui/material";
+import Typography from "@mui/material/Typography";
 
 
 type Props = {
     couponCard: IDiscountCard
-    isOpen: boolean
     setIsClose: Function
 }
 
-const CouponInformationComponent: React.FC<Props> = ({couponCard, isOpen, setIsClose}) => {
+const CouponInformationComponent: React.FC<Props> = ({couponCard, setIsClose}) => {
     const canvasRef = useRef<HTMLCanvasElement>(null)
-    const [openState, setOpenState] = useState<boolean>(false)
-    useEffect(() => {
-        if (isOpen)
-            setTimeout(() => {
-                setOpenState(isOpen)
-            }, 1)
-    }, []);
 
 
     useEffect(() => {
@@ -36,7 +30,6 @@ const CouponInformationComponent: React.FC<Props> = ({couponCard, isOpen, setIsC
     }, [canvasRef, couponCard.card_number]);
 
     const onCloseHandler = () => {
-        setOpenState(false)
         setTimeout(() => {
             setIsClose()
         }, 300)
@@ -44,37 +37,50 @@ const CouponInformationComponent: React.FC<Props> = ({couponCard, isOpen, setIsC
     }
 
     return (
-        <div className={`${style["information-container"]} ${!openState && style["close"]}`}>
-            <div className={style["close-button"]} onClick={onCloseHandler}>
-                X
-            </div>
-            <div className={style["information-title"]}>
-                Aby użyć podaj:
-            </div>
-            <div className={style["information-line"]}>
-                <div className={style["label"]}>
-                    Numer telefonu:
-                </div>
-                <div className={style["information"]}>
-                    {couponCard.phone_number}
-                </div>
-            </div>
-            <div className={style["information-line"]}>
-                <div className={style["label"]}>
-                    Numer karty:
-                </div>
-                <div className={style["information"]}>
-                    {couponCard.card_number}
-                </div>
-            </div>
-            <div className={style["information-title"]}>
-                Lub zeskanuj:
-            </div>
-            <div className={style["code-container"]}>
-                <canvas ref={canvasRef}/>
-            </div>
-        </div>
+        <React.Fragment>
+            <Box>
 
+                <Box textAlign={"right"}>
+                    <Button onClick={onCloseHandler} color={"secondary"} size={"small"}>
+                        X
+                    </Button>
+                </Box>
+                <Typography align="center" fontWeight="bold" padding="5px 0 10px 0">
+                    Aby użyć podaj:
+                </Typography>
+
+                <Grid container justifyContent={"space-between"}>
+                    <Typography>
+                        Numer telefonu:
+                    </Typography>
+                    <Typography fontWeight="bold">
+                        {couponCard.phone_number}
+                    </Typography>
+                </Grid>
+                <Grid container justifyContent={"space-between"}>
+                    <Typography>
+                        Numer karty:
+                    </Typography>
+                    <Typography fontWeight="bold">
+                        {couponCard.card_number}
+                    </Typography>
+                </Grid>
+
+                <Typography align="center" fontWeight="bold" padding="5px 0 10px 0">
+                    Lub zeskanuj:
+                </Typography>
+
+            </Box>
+            <Box bgcolor={"#ffffff"}
+                 sx={{
+                     marginInline: "-20px",
+                     padding: "10px 0 5px 0",
+                     textAlign: "center"
+                 }}>
+                <canvas ref={canvasRef}/>
+
+            </Box>
+        </React.Fragment>
     )
 }
 
