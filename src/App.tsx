@@ -6,6 +6,7 @@ import PrivateRoute from "./components/auth/PrivateRoute";
 import Login from "./components/auth/Login";
 import {ThemeProvider} from "@mui/material";
 import {muiTheme} from "./shared/styles/muiTheme";
+import LogOut from "./components/auth/LogOut";
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
                     />
                     <Route path="/" element={<PrivateRoute/>}>
                         <Route path="/" element={<DiscountApp/>}/>
+                        <Route path="/logout" element={<LogOut />}/>
                     </Route>
                 </Routes>
             </ThemeProvider>
