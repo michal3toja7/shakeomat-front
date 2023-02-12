@@ -1,6 +1,5 @@
 import NavBarComponent from "./siteBase/NavBarComponent";
-import DiscountContainerComponent from "./discounts/DiscountContainerComponent";
-import ControlPanelComponent from "./siteBase/controlPanelComponent/ControlPanelComponent";
+import ControlDiscountAppComponent from "./ControlDiscountAppComponent";
 import React from "react";
 
 
@@ -10,8 +9,7 @@ const DiscountApp: React.FC<Props> = () => {
     return (
         <React.Fragment>
             <NavBarComponent/>
-            <DiscountContainerComponent/>
-            <ControlPanelComponent/>
+            <ControlDiscountAppComponent/>
         </React.Fragment>
     )
 }

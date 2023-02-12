@@ -1,32 +1,30 @@
 import React, {useEffect, useState} from "react";
-import style from './DiscountContainerComponent.module.css'
 import IDiscountCoupon from "../../types/discountCoupon.type";
 import DiscountCouponComponent from "./coupon/DiscountCouponComponent";
 import getDiscountCoupons from "../../services/discount.service";
-import {useSearchParams} from "react-router-dom";
 import LoadingModal from "../siteBase/LoadingModal";
+import {Container, Grid} from "@mui/material";
 
 
-type DiscountContainerComponentProps = {}
 
-const DiscountContainerComponent: React.FC<DiscountContainerComponentProps> = () => {
+type DiscountContainerComponentProps = {
+    discountsType: string
+}
+
+const DiscountContainerComponent: React.FC<DiscountContainerComponentProps> = ({discountsType}) => {
     const [discountCoupons, setDiscountCoupons] = useState<IDiscountCoupon[]>()
     const [loading, setLoading] = useState<boolean>(true)
-    const [searchParams] = useSearchParams()
-    const getType = () => {
-        return searchParams.get("type") || "private"
-    }
 
 
     useEffect(() => {
         setLoading(true)
-        getDiscountCoupons(getType())
+        getDiscountCoupons(discountsType)
             .then(result => {
-            setDiscountCoupons(result.results)
+                setDiscountCoupons(result.results)
                 setLoading(false)
-        })
-            .catch(()=> setLoading(false))
-    }, [searchParams]);
+            })
+            .catch(() => setLoading(false))
+    }, [discountsType]);
 
     const discountsUpdate = (discount: IDiscountCoupon, remove: boolean = false) => {
         if (!discountCoupons)
@@ -43,22 +41,24 @@ const DiscountContainerComponent: React.FC<DiscountContainerComponentProps> = ()
     }
 
     return (
-        <div className={style["container"]}>
-            <div className={style["discount-container"]}>
+        <Container>
+            <Grid container>
                 {
                     discountCoupons?.map(discountCoupon => {
                         return (
-                            <DiscountCouponComponent key={discountCoupon.id}
-                                                     discountCoupon={discountCoupon}
-                                                     discountUpdate={discountsUpdate}
-                            />
+                            <Grid item xs={12} md={6} lg={4}>
+                                <DiscountCouponComponent key={discountCoupon.id}
+                                                         discountCoupon={discountCoupon}
+                                                         discountUpdate={discountsUpdate}
+                                                         discountsType={discountsType}
+                                />
+                            </Grid>
                         )
                     })
                 }
-            </div>
+            </Grid>
             <LoadingModal isLoading={loading}/>
-
-        </div>
+        </Container>
     )
 }
 

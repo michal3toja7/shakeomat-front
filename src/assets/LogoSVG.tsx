@@ -1,12 +1,15 @@
 import React from "react";
 
 type Props = {
+    width?: number
 }
-const LogoSVG: React.FC<Props> = () => {
+const LogoSVG: React.FC<Props> = ({width=1404}) => {
+
+    const heigth = (width/1404)*284
 
     return (
         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
-             x="0px" y="0px" width="1404px" height="284px" viewBox="0 0 1404 284" enableBackground="new 0 0 1404 284"
+             x="0px" y="0px" width={`${width}px`} height={`${heigth}px`} viewBox="0 0 1404 284" enableBackground="new 0 0 1404 284"
              xmlSpace="preserve">
             <image id="image0" width="1404" height="284" x="0" y="0"
                    href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABXwAAAEcCAYAAAB0ynwSAAABfWlDQ1BpY2MAACiRfZE9SMNQFIVP
