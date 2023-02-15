@@ -32,7 +32,13 @@ const initContentSwitcher: IContentSwitcher[] = [
 const ControlDiscountAppComponent: React.FC<ControlPanelComponentProps> = () => {
     const [contentSwitchers, setContentSwitchers] = useState<IContentSwitcher[]>(initContentSwitcher)
     const [isSelected, setIsSelected] = useState<string>("")
+
     useEffect(() => {
+        const switcher_key = sessionStorage.getItem("switcherKey")
+        if (switcher_key) {
+            contentSwitcher(switcher_key)
+            return
+        }
         let index = findInList(contentSwitchers, "isSelected", true)
         setIsSelected(contentSwitchers[index].key)
     }, []);
@@ -46,14 +52,15 @@ const ControlDiscountAppComponent: React.FC<ControlPanelComponentProps> = () => 
     }
 
     const contentSwitcherHandler = (event: React.SyntheticEvent, switcherKey: string) => {
+        contentSwitcher(switcherKey)
+    }
+    const contentSwitcher = (switcherKey: string) => {
         let index = findInList(contentSwitchers, "key", switcherKey)
         setContentSwitchers(prevState => {
             return [...updateSwitchersList(prevState, index)]
-
         })
         setIsSelected(switcherKey)
-
-
+        sessionStorage.setItem("switcherKey", switcherKey)
     }
 
     return (
@@ -69,7 +76,7 @@ const ControlDiscountAppComponent: React.FC<ControlPanelComponentProps> = () => 
                 })}
                 <Box bgcolor={"#f5f5f5"} sx={
                     {
-                        boxShadow:"0px -2px 4px -1px rgb(0 0 0 / 20%), 0px -4px 5px 0px rgb(0 0 0 / 14%), 0px -1px 10px 0px rgb(0 0 0 / 12%)",
+                        boxShadow: "0px -2px 4px -1px rgb(0 0 0 / 20%), 0px -4px 5px 0px rgb(0 0 0 / 14%), 0px -1px 10px 0px rgb(0 0 0 / 12%)",
                         position: "fixed",
                         width: "100%",
                         bottom: 0,
