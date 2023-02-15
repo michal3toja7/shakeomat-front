@@ -1,96 +1,102 @@
 .loader-container {
-    opacity: 0;
-    display: flex;
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    justify-content: center;
-    align-items: center;
-    z-index: 101;
-    backdrop-filter: grayscale(100%) blur(5px);
-    flex-direction: column;
-    row-gap: 20px;
-    font-size: 20px;
-    font-weight: bold;
-    text-shadow: 5px 5px 80px rgba(66, 68, 90, 1);
-    transition: opacity 600ms;
-
+  opacity: 0;
+  display: flex;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  justify-content: center;
+  align-items: center;
+  z-index: 101;
+  backdrop-filter: grayscale(100%) blur(5px);
+  flex-direction: column;
+  row-gap: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  text-shadow: 5px 5px 80px rgba(66, 68, 90, 1);
+  transition: opacity 600ms;
 }
 .loader-container.show-modal {
-    opacity: 1;
+  opacity: 1;
 }
 .loader-container.display-none {
-    display: none;
+  display: none;
 }
 
 .loader {
-    position: relative;
-    width: 250px;
-    height: 250px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #fff;
-    border-radius: 50%;
-
-
+  position: relative;
+  width: 250px;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 50%;
 }
 .loader:after {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    border: 20px solid #fded14;
-    /* Light grey */
-    border-top: 20px solid #e02130;
-    /* Dark Green */
-    border-radius: 50%;
-    animation: spinloader 2s linear infinite;
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  border: 20px solid #fded14;
+  /* Light grey */
+  border-top: 20px solid #e02130;
+  /* Dark Green */
+  border-radius: 50%;
+  animation: spinloader 2s linear infinite;
 }
 .loader:before {
-    content: "";
-    position: absolute;
-    left: -5px;
-    top: -5px;
-    bottom: -5px;
-    right: -5px;
-    border: 30px solid #f0922e;
-    border-radius: 50%;
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: -5px;
+  bottom: -5px;
+  right: -5px;
+  border: 30px solid #f0922e;
+  border-radius: 50%;
 }
 
 .loader svg {
-    height: 200px;
-    width: 200px;
-    animation: gelatine 1s infinite;
+  height: 200px;
+  width: 200px;
+  animation: gelatine 1s infinite;
 }
 
 @keyframes gelatine {
-    from, to { transform: scale(1, 1); }
-    25% { transform: scale(0.9, 1.1); }
-    50% { transform: scale(1.1, 0.9); }
-    75% { transform: scale(0.95, 1.05); }
+  from,
+  to {
+    transform: scale(1, 1);
+  }
+  25% {
+    transform: scale(0.9, 1.1);
+  }
+  50% {
+    transform: scale(1.1, 0.9);
+  }
+  75% {
+    transform: scale(0.95, 1.05);
+  }
 }
 
 @keyframes spinloader {
-    0% {
-        transform: rotate(0deg);
-    }
+  0% {
+    transform: rotate(0deg);
+  }
 
-    100% {
-        transform: rotate(360deg);
-    }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes spinlogo {
-    0% {
-        transform: rotate(360deg);
-    }
+  0% {
+    transform: rotate(360deg);
+  }
 
-    100% {
-        transform: rotate(0deg);
-    }
+  100% {
+    transform: rotate(0deg);
+  }
 }

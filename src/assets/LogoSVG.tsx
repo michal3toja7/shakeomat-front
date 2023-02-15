@@ -1,18 +1,32 @@
 import React from "react";
 
 type Props = {
-    width?: number
-}
-const LogoSVG: React.FC<Props> = ({width=1404}) => {
+  width?: number;
+};
+const LogoSVG: React.FC<Props> = ({ width = 1404 }) => {
+  const heigth = (width / 1404) * 284;
 
-    const heigth = (width/1404)*284
-
-    return (
-        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
-             x="0px" y="0px" width={`${width}px`} height={`${heigth}px`} viewBox="0 0 1404 284" enableBackground="new 0 0 1404 284"
-             xmlSpace="preserve">
-            <image id="image0" width="1404" height="284" x="0" y="0"
-                   href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABXwAAAEcCAYAAAB0ynwSAAABfWlDQ1BpY2MAACiRfZE9SMNQFIVP
+  return (
+    <svg
+      version="1.1"
+      id="Layer_1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+      x="0px"
+      y="0px"
+      width={`${width}px`}
+      height={`${heigth}px`}
+      viewBox="0 0 1404 284"
+      enableBackground="new 0 0 1404 284"
+      xmlSpace="preserve"
+    >
+      <image
+        id="image0"
+        width="1404"
+        height="284"
+        x="0"
+        y="0"
+        href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABXwAAAEcCAYAAAB0ynwSAAABfWlDQ1BpY2MAACiRfZE9SMNQFIVP
 U6UiFQcziDhkqE4WREV0kyoWwUJpK7TqYPLSP2jSkKS4OAquBQd/FqsOLs66OrgKguAPiKOTk6KL
 lHhfUmgR44XH+zjvnsN79wFCo8I0q2sc0HTbTMVjUja3KoVeEUYAImYRkpllJNKLGfjW1z31Ut1F
 eZZ/35/Vp+YtBgQk4jlmmDbxBvH0pm1w3icWWUlWic+Jx0y6IPEj1xWP3zgXXRZ4pmhmUvPEIrFU
@@ -1202,11 +1216,10 @@ ADIwMjItMTItMTVUMjE6MzI6MDkrMDA6MDD6l2pXAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIyLTEy
 LTE1VDIxOjMyOjA5KzAwOjAwi8rS6wAAABt0RVh0aWNjOmNvcHlyaWdodABQdWJsaWMgRG9tYWlu
 tpExWwAAACJ0RVh0aWNjOmRlc2NyaXB0aW9uAEdJTVAgYnVpbHQtaW4gc1JHQkxnQRMAAAAVdEVY
 dGljYzptYW51ZmFjdHVyZXIAR0lNUEyekMoAAAAOdEVYdGljYzptb2RlbABzUkdCW2BJQwAAAABJ
-RU5ErkJggg=="/>
-        </svg>
+RU5ErkJggg=="
+      />
+    </svg>
+  );
+};
 
-    )
-}
-
-export default LogoSVG
-
+export default LogoSVG;

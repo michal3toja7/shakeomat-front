@@ -1,67 +1,67 @@
 .modal-container.init {
-    opacity: 0;
+  opacity: 0;
 }
 
 .modal-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    backdrop-filter: blur(3px) grayscale(100%);
-    z-index: 1051;
-    opacity: 1;
-    transition: opacity 400ms;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  backdrop-filter: blur(3px) grayscale(100%);
+  z-index: 1051;
+  opacity: 1;
+  transition: opacity 400ms;
 }
 
 .item-modal.init {
-    opacity: 0;
+  opacity: 0;
 }
 
 .item-modal {
-    opacity: 1;
-    position: absolute;
-    width: 100%;
-    top: 50%;
-    right: 50%;
-    transform: translate(50%, -50%);
-    background: #fff;
-    border-top: 5px solid #e02130;
-    border-bottom: 5px solid #e02130;
-    z-index: 1;
-    padding: 10px 0;
-    font-family: Arial, serif;
-    font-style: italic;
-    font-weight: bold;
-    text-align: center;
+  opacity: 1;
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  background: #fff;
+  border-top: 5px solid #e02130;
+  border-bottom: 5px solid #e02130;
+  z-index: 1;
+  padding: 10px 0;
+  font-family: Arial, serif;
+  font-style: italic;
+  font-weight: bold;
+  text-align: center;
 }
 
 .item-modal.rotated {
-    width: 120%;
-    top: 50%;
-    right: 50%;
-    transform: translate(50%, -50%) rotate(-15deg);
+  width: 120%;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%) rotate(-15deg);
 }
 
 .item-modal .title {
-    font-size: 25px;
-    font-weight: bold;
-    color: #e02130;
-    padding-bottom: 5px;
+  font-size: 25px;
+  font-weight: bold;
+  color: #e02130;
+  padding-bottom: 5px;
 }
 
 .item-modal .user span {
-    font-weight: normal;
+  font-weight: normal;
 }
 
 .item-modal .after-text {
-    font-weight: lighter;
+  font-weight: lighter;
 }
 
 .item-modal .confirmation-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    column-gap: 30px;
-    margin: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 30px;
+  margin: 10px 0;
 }

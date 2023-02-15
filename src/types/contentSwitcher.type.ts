@@ -1,5 +1,5 @@
 export default interface IContentSwitcher {
-    key: string
-    isSelected: boolean
-    text :string
+  key: string;
+  isSelected: boolean;
+  text: string;
 }
