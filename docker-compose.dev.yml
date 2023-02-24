@@ -6,9 +6,8 @@ services:
     image: shakeomat-front
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: ./Dockerfile.prod
     volumes:
       - ./src:/shakeomat-front/src
     ports:
       - 3000:3000
-s
